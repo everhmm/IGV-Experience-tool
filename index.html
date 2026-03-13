@@ -1,68 +1,170 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="es">
 <head>
-<title>Experience Tool</title>
-<link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIESEC | Experience Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0e14;
+            --card-bg: #161b22;
+            --text: #e6edf3;
+            --accent: #0054ff; /* AIESEC Blue */
+            --success: #238636;
+            --warning: #d29922;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container { max-width: 1200px; margin: auto; }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 20px;
+        }
+
+        h1 { font-weight: 600; font-size: 1.5rem; letter-spacing: -0.5px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 24px;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+        .status {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .status-completed { background: var(--success); }
+        .status-realized { background: var(--accent); }
+        .status-approved { background: var(--warning); color: black; }
+
+        .tn-name { font-size: 1.2rem; font-weight: 600; margin: 10px 0; }
+        .details { font-size: 0.9rem; color: #8b949e; margin-bottom: 20px; }
+
+        .links-grid {
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid #30363d;
+            padding-top: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: #21262d;
+            color: var(--text);
+            transition: 0.2s;
+        }
+
+        .btn:hover { background: #30363d; color: white; }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px;
+            background: var(--card-bg);
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            color: white;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
 <body>
 
-<div class="sidebar">
+<div class="container">
+    <header>
+        <h1>IGV Experience Tracker</h1>
+        <div id="counter" style="color: #8b949e; font-size: 0.9rem;">Cargando TNs...</div>
+    </header>
 
-<h2>Experience Tool</h2>
+    <input type="text" id="searchInput" class="search-bar" placeholder="Buscar por nombre, país o proyecto...">
 
-<a href="index.html">Dashboard</a>
-<a href="pages/ecb.html">ECB</a>
-<a href="pages/tns.html">TNs</a>
-<a href="pages/buddies.html">Buddies</a>
-<a href="pages/familia-global.html">Familia Global</a>
-<a href="pages/otros.html">Otros</a>
-<a href="pages/attraction.html">Attraction</a>
-
+    <div class="grid" id="dashboard">
+        </div>
 </div>
 
-<div class="main">
+<script>
+    // PEGA TU URL DE GOOGLE SHEETS CSV AQUÍ
+    const public_spreadsheet_url = 'TU_URL_CSV_AQUÍ';
 
-<h1>TOOL – Experience Database</h1>
+    function init() {
+        Papa.parse(public_spreadsheet_url, {
+            download: true,
+            header: true,
+            complete: showInfo
+        });
+    }
 
-<p>Guía de procesos, ideas y gestión de intercambios.</p>
+    function showInfo(results) {
+        const data = results.data;
+        const container = document.getElementById('dashboard');
+        document.getElementById('counter').innerText = `${data.length} Voluntarios registrados`;
 
-<div class="cards">
+        data.forEach(tn => {
+            if(!tn['EP/OP NAME']) return;
 
-<div class="card">
-<h3>ECB</h3>
-<p>Procesos y auditorías</p>
-</div>
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            // Lógica de color de estado
+            let statusClass = 'status-approved';
+            if(tn.STATUS === 'COMPLETED') statusClass = 'status-completed';
+            if(tn.STATUS === 'REALIZED') statusClass = 'status-realized';
 
-<div class="card">
-<h3>TNs</h3>
-<p>Gestión de trainees</p>
-</div>
+            card.innerHTML = `
+                <div class="status ${statusClass}">${tn.STATUS}</div>
+                <div class="tn-name">${tn['EP/OP NAME']}</div>
+                <div class="details">
+                    🌍 ${tn['MC HOME']} (${tn['LC HOME']})<br>
+                    🚀 Proyecto: ${tn['PROJECT NAME']}<br>
+                    📅 RE: ${tn['FECHA RE']} | FI: ${tn['FECHA FI']}
+                </div>
+                <div class="links-grid">
+                    <a href="#" class="btn">Perfil EP</a>
+                    <a href="#" class="btn">Auditoría</a>
+                    <a href="https://wa.me/" class="btn" style="color: #25D366;">WhatsApp</a>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
 
-<div class="card">
-<h3>Buddies</h3>
-<p>Equipo acompañante</p>
-</div>
-
-<div class="card">
-<h3>Familia Global</h3>
-<p>Familias anfitrionas</p>
-</div>
-
-<div class="card">
-<h3>Otros</h3>
-<p>Recursos adicionales</p>
-</div>
-
-<div class="card">
-<h3>Attraction</h3>
-<p>Ideas culturales</p>
-</div>
-
-</div>
-
-</div>
+    window.addEventListener('DOMContentLoaded', init);
+</script>
 
 </body>
 </html>

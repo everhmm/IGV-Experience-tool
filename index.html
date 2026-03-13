@@ -1,83 +1,418 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard AIESEC v3</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg: #05070a; --card: #111418; --accent: #0054ff; --text: #ffffff; --dim: #94a3b8; }
-        body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; padding: 20px; }
-        
-        /* Navegación de Títulos del Excel */
-        .navbar { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid #222; }
-        .nav-btn { background: #1c1f24; color: white; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-size: 12px; font-weight: 700; border: 1px solid #333; transition: 0.3s; }
-        .nav-btn:hover { background: var(--accent); border-color: var(--accent); }
 
-        .search-bar { width: 100%; padding: 15px; background: #161b22; border: 1px solid #333; border-radius: 12px; color: white; margin-bottom: 30px; box-sizing: border-box; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: var(--card); border: 1px solid #222; padding: 20px; border-radius: 18px; }
-        .status { font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 5px; float: right; }
-        .COMPLETED { background: rgba(35, 134, 54, 0.2); color: #3fb950; }
-        .REALIZED { background: rgba(31, 111, 235, 0.2); color: #58a6ff; }
-        .APPROVED { background: rgba(210, 153, 34, 0.2); color: #d29922; }
-    </style>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AIESEC Experience Dashboard</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg:#0b0f14;
+--card:rgba(255,255,255,0.05);
+--border:rgba(255,255,255,0.1);
+--accent:#2f81f7;
+--text:#e6edf3;
+--dim:#8b949e;
+}
+
+body{
+background:linear-gradient(135deg,#05070a,#0b0f14);
+font-family:'Plus Jakarta Sans',sans-serif;
+color:var(--text);
+margin:0;
+padding:30px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.logo{
+font-size:22px;
+font-weight:700;
+}
+
+.search{
+background:var(--card);
+border:1px solid var(--border);
+padding:12px;
+border-radius:10px;
+color:white;
+width:300px;
+}
+
+.stats{
+display:flex;
+gap:15px;
+margin-bottom:25px;
+flex-wrap:wrap;
+}
+
+.stat{
+background:var(--card);
+border:1px solid var(--border);
+padding:10px 18px;
+border-radius:10px;
+font-size:13px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+gap:20px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:18px;
+padding:20px;
+backdrop-filter:blur(10px);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+border-color:var(--accent);
+}
+
+.status{
+font-size:10px;
+font-weight:700;
+padding:4px 10px;
+border-radius:5px;
+float:right;
+}
+
+.COMPLETED{
+background:rgba(35,134,54,0.2);
+color:#3fb950;
+}
+
+.REALIZED{
+background:rgba(31,111,235,0.2);
+color:#58a6ff;
+}
+
+.APPROVED{
+background:rgba(210,153,34,0.2);
+color:#d29922;
+}
+
+button{
+background:var(--accent);
+border:none;
+color:white;
+padding:8px 12px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.map{
+height:350px;
+border-radius:20px;
+margin-top:30px;
+}
+
+.section{
+margin-top:40px;
+}
+
+.doc-btn{
+display:block;
+margin-top:10px;
+background:#1f6feb;
+padding:8px;
+text-align:center;
+border-radius:8px;
+text-decoration:none;
+color:white;
+font-size:13px;
+}
+
+</style>
+
 </head>
+
 <body>
 
-    <div class="navbar">
-        <a href="#" class="nav-btn" style="background: var(--accent);">📊 Control Auditorías</a>
-        <a href="https://www.canva.com/design/DAGmWoBjlhc/..." target="_blank" class="nav-btn">🗺️ Rutas Turísticas</a>
-        <a href="#" class="nav-btn">🥟 Comida Típica</a>
-        <a href="#" class="nav-btn">💡 Ideas Bienvenida</a>
-        <a href="https://www.canva.com/design/DAGhohlT_nY/..." target="_blank" class="nav-btn">🧠 Lead Space</a>
-    </div>
+<div class="header">
 
-    <input type="text" id="searchInput" class="search-bar" placeholder="Buscar voluntario por nombre, país o ID...">
+<div class="logo">🌍 AIESEC Experience Dashboard</div>
 
-    <div class="grid" id="container"></div>
+<input id="searchInput" class="search" placeholder="Buscar TN por nombre, país o ID">
 
-    <script>
-        const CSV_URL = 'TU_LINK_CSV_AQUÍ';
-        let allData = [];
+</div>
 
-        function init() {
-            Papa.parse(CSV_URL, {
-                download: true, header: true,
-                complete: function(results) {
-                    allData = results.data.filter(tn => tn['EP/OP NAME']);
-                    render(allData);
-                }
-            });
-        }
+<div class="stats">
 
-        function render(data) {
-            const container = document.getElementById('container');
-            container.innerHTML = '';
-            data.forEach(tn => {
-                container.innerHTML += `
-                    <div class="card">
-                        <span class="status ${tn.STATUS}">${tn.STATUS}</span>
-                        <h3 style="margin:0">${tn['EP/OP NAME']}</h3>
-                        <p style="font-size:12px; color:var(--dim)">${tn['MC HOME']} | ID: ${tn['EP ID']}</p>
-                        <p style="font-size:11px">Proyecto: ${tn['PROJECT NAME']}</p>
-                        <a href="https://wa.me/${tn['Numero de contacto']}" class="nav-btn" style="display:block; text-align:center; margin-top:10px; background:#238636; border:none">WhatsApp</a>
-                    </div>
-                `;
-            });
-        }
+<div class="stat" id="total"></div>
+<div class="stat" id="completed"></div>
+<div class="stat" id="realized"></div>
+<div class="stat" id="approved"></div>
 
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const val = e.target.value.toLowerCase();
-            const filtered = allData.filter(tn => 
-                tn['EP/OP NAME'].toLowerCase().includes(val) || 
-                tn['MC HOME'].toLowerCase().includes(val) ||
-                tn['EP ID'].includes(val)
-            );
-            render(filtered);
-        });
+</div>
 
-        window.onload = init;
-    </script>
+<div class="grid" id="container"></div>
+
+<div class="section">
+
+<h2>📊 Estadísticas</h2>
+
+<canvas id="statusChart"></canvas>
+
+</div>
+
+<div class="section">
+
+<h2>🌍 Mapa de TNs</h2>
+
+<div id="map" class="map"></div>
+
+</div>
+
+<div class="section">
+
+<h2>👥 Buddies</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Buddy 1</h3>
+<p>Universidad UMSA</p>
+<button>WhatsApp</button>
+</div>
+
+<div class="card">
+<h3>Buddy 2</h3>
+<p>Universidad UCB</p>
+<button>WhatsApp</button>
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>🏠 Familias Globales</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Familia Rodriguez</h3>
+<p>Capacidad: 2 TNs</p>
+</div>
+
+<div class="card">
+<h3>Familia Quispe</h3>
+<p>Capacidad: 1 TN</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>🧠 Attraction</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>🍲 Comida típica</h3>
+<p>Ideas gastronómicas para TNs</p>
+</div>
+
+<div class="card">
+<h3>🗺 Rutas turísticas</h3>
+<p>Lugares para visitar</p>
+</div>
+
+<div class="card">
+<h3>🎉 Ideas bienvenida</h3>
+<p>Actividades culturales</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>📂 Documentos</h2>
+
+<a href="#" class="doc-btn">Booklet ECB</a>
+<a href="#" class="doc-btn">Normas de intercambio</a>
+<a href="#" class="doc-btn">Formulario Buddies</a>
+
+</div>
+
+<script>
+
+const CSV_URL = "https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/export?format=csv&gid=984632049"
+
+let allData = []
+
+function init(){
+
+Papa.parse(CSV_URL,{
+download:true,
+header:true,
+skipEmptyLines:true,
+
+complete:function(results){
+
+allData = results.data
+
+updateStats()
+
+render(allData)
+
+createChart()
+
+initMap()
+
+}
+
+})
+
+}
+
+function normalizeStatus(status){
+
+if(!status) return "APPROVED"
+
+return status.trim().toUpperCase()
+
+}
+
+function updateStats(){
+
+const total = allData.length
+
+const completed = allData.filter(t=>normalizeStatus(t.STATUS)==="COMPLETED").length
+const realized = allData.filter(t=>normalizeStatus(t.STATUS)==="REALIZED").length
+const approved = allData.filter(t=>normalizeStatus(t.STATUS)==="APPROVED").length
+
+document.getElementById("total").innerText="Total TNs: "+total
+document.getElementById("completed").innerText="Completed: "+completed
+document.getElementById("realized").innerText="Realized: "+realized
+document.getElementById("approved").innerText="Approved: "+approved
+
+}
+
+function render(data){
+
+const container = document.getElementById("container")
+
+container.innerHTML=""
+
+data.forEach(tn=>{
+
+const name = tn["EP/OP NAME"] || "Sin nombre"
+const country = tn["MC HOME"] || "Sin país"
+const id = tn["EP ID"] || "-"
+const project = tn["PROJECT NAME"] || "-"
+const status = normalizeStatus(tn["STATUS"])
+
+container.innerHTML+=`
+
+<div class="card">
+
+<span class="status ${status}">${status}</span>
+
+<h3>${name}</h3>
+
+<p style="font-size:12px;color:#8b949e">
+
+${country} | ID: ${id}
+
+</p>
+
+<p style="font-size:12px">
+
+Proyecto: ${project}
+
+</p>
+
+</div>
+
+`
+
+})
+
+}
+
+document.getElementById("searchInput").addEventListener("input",(e)=>{
+
+const val = e.target.value.toLowerCase()
+
+const filtered = allData.filter(tn=>
+
+(tn["EP/OP NAME"]||"").toLowerCase().includes(val) ||
+
+(tn["MC HOME"]||"").toLowerCase().includes(val) ||
+
+(tn["EP ID"]||"").toString().includes(val)
+
+)
+
+render(filtered)
+
+})
+
+function createChart(){
+
+const completed = allData.filter(t=>normalizeStatus(t.STATUS)==="COMPLETED").length
+const realized = allData.filter(t=>normalizeStatus(t.STATUS)==="REALIZED").length
+const approved = allData.filter(t=>normalizeStatus(t.STATUS)==="APPROVED").length
+
+const ctx = document.getElementById("statusChart")
+
+new Chart(ctx,{
+type:'doughnut',
+data:{
+labels:['Completed','Realized','Approved'],
+datasets:[{
+data:[completed,realized,approved]
+}]
+}
+})
+
+}
+
+function initMap(){
+
+var map = L.map('map').setView([20,0],2)
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+maxZoom:18
+}).addTo(map)
+
+L.marker([-16.5,-68.15]).addTo(map)
+.bindPopup("La Paz - AIESEC")
+
+}
+
+window.onload = init
+
+</script>
+
 </body>
 </html>

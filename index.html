@@ -2,77 +2,201 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>AIESEC IGV Experience Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIESEC | Experience Hub</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #05070a; --card: #111418; --accent: #0054ff; --text: #ffffff; --dim: #94a3b8; }
-        body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; padding: 40px; }
-        .container { max-width: 1200px; margin: auto; }
-        .search-bar { width: 100%; padding: 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; color: white; margin-bottom: 40px; font-size: 16px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; }
-        .card { background: var(--card); border: 1px solid #222; padding: 30px; border-radius: 24px; transition: 0.3s; position: relative; }
-        .card:hover { border-color: var(--accent); transform: translateY(-8px); }
-        .status { position: absolute; top: 25px; right: 25px; font-size: 10px; font-weight: 800; padding: 5px 12px; border-radius: 50px; }
-        .COMPLETED { background: rgba(35, 134, 54, 0.2); color: #3fb950; }
-        .REALIZED { background: rgba(31, 111, 235, 0.2); color: #58a6ff; }
-        .APPROVED { background: rgba(210, 153, 34, 0.2); color: #d29922; }
-        .btn { display: inline-block; width: 45%; text-align: center; padding: 12px; border-radius: 12px; text-decoration: none; font-size: 12px; font-weight: bold; margin-top: 15px; background: #fff; color: #000; }
-        .btn-wa { background: #238636; color: #fff; margin-right: 5%; }
+        :root {
+            --primary: #0054ff;
+            --bg: #05070a;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background-image: radial-gradient(circle at top right, #001d4d, transparent 400px);
+        }
+
+        .header {
+            max-width: 1200px;
+            margin: 0 auto 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .header h1 { font-size: 2.5rem; margin: 0; letter-spacing: -1px; }
+        .header p { color: var(--text-dim); margin-top: 5px; }
+
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 15px 25px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            color: white;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            outline: none;
+            transition: 0.3s;
+        }
+
+        #searchInput:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(0,84,255,0.2); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .badge {
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 50px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .status-COMPLETED { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .status-REALIZED { background: rgba(0, 84, 255, 0.2); color: #60a5fa; }
+        .status-APPROVED { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+
+        .name { font-size: 1.4rem; font-weight: 700; margin-bottom: 5px; }
+        .country { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+
+        .audit-info {
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+
+        .audit-item { font-size: 0.8rem; display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .audit-item span:last-child { color: var(--text-dim); }
+
+        .links { display: flex; gap: 10px; }
+        .btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-align: center;
+            background: white;
+            color: black;
+            transition: 0.3s;
+        }
+
+        .btn-wa { background: #25D366; color: white; }
+        .btn-wa:hover { filter: brightness(1.1); }
+        .btn-secondary { background: var(--border); color: white; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.2); }
+
+        /* Loader animado */
+        #loader { text-align: center; padding: 50px; font-size: 1.2rem; color: var(--primary); }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Experience Hub V2</h1>
-        <input type="text" id="searchInput" class="search-bar" placeholder="Buscar por Nombre, País, EP ID o Buddy...">
-        <div class="grid" id="container"></div>
+
+<div class="header">
+    <div>
+        <h1>AIESEC Experience</h1>
+        <p id="statsText">Analizando Base de Datos V2...</p>
     </div>
+</div>
 
-    <script>
-        const CSV_URL = 'TU_URL_CSV_AQUÍ'; // Pestaña "CONTROL AUDITORIAS TNs"
-        let allData = [];
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="Buscar por TN, País, Proyecto o ID...">
+</div>
 
-        function init() {
-            Papa.parse(CSV_URL, {
-                download: true, header: true,
-                complete: function(results) {
-                    allData = results.data.filter(tn => tn['EP/OP NAME']);
-                    render(allData);
-                }
-            });
-        }
+<div id="loader">Cargando datos del equipo...</div>
+<div class="grid" id="dashboard"></div>
 
-        function render(data) {
-            const container = document.getElementById('container');
-            container.innerHTML = '';
-            data.forEach(tn => {
-                container.innerHTML += `
-                    <div class="card">
-                        <span class="status ${tn.STATUS}">${tn.STATUS}</span>
-                        <h2 style="margin:0">${tn['EP/OP NAME']}</h2>
-                        <p style="color:var(--dim)">🌍 ${tn['MC HOME']} | ID: ${tn['EP ID']}</p>
-                        <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:12px; font-size:12px; margin:15px 0;">
-                            <b>PROYECTO:</b> ${tn['PROJECT NAME']}<br>
-                            <b>DATES:</b> ${tn['FECHA RE']} - ${tn['FECHA FI']}
-                        </div>
-                        <a href="https://wa.me/${tn['Numero de contacto']}" class="btn btn-wa">WhatsApp</a>
-                        <a href="#" class="btn">Documentos</a>
-                    </div>
-                `;
-            });
-        }
+<script>
+    // REEMPLAZA ESTO CON TU URL CSV DE GOOGLE SHEETS
+    const csvUrl = 'TU_URL_DE_SPREADSHEET_CSV_AQUÍ';
 
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const val = e.target.value.toLowerCase();
-            const filtered = allData.filter(tn => 
-                tn['EP/OP NAME'].toLowerCase().includes(val) || 
-                tn['MC HOME'].toLowerCase().includes(val) ||
-                tn['EP ID'].includes(val)
-            );
-            render(filtered);
+    function init() {
+        Papa.parse(csvUrl, {
+            download: true,
+            header: true,
+            complete: (results) => {
+                document.getElementById('loader').style.display = 'none';
+                renderDashboard(results.data);
+            }
         });
+    }
 
-        window.onload = init;
-    </script>
+    function renderDashboard(data) {
+        const container = document.getElementById('dashboard');
+        const stats = document.getElementById('statsText');
+        const filteredData = data.filter(row => row['EP/OP NAME']);
+        
+        stats.innerText = `${filteredData.length} Voluntarios en Gestión Local`;
+
+        filteredData.forEach(tn => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            const status = tn.STATUS ? tn.STATUS.toUpperCase() : 'UNKNOWN';
+            
+            card.innerHTML = `
+                <div class="badge status-${status}">${status}</div>
+                <div class="name">${tn['EP/OP NAME']}</div>
+                <div class="country">📍 ${tn['MC HOME']} ➜ ${tn['LUGAR DE LA OPORTUNIDAD']}</div>
+                
+                <div class="audit-info">
+                    <div class="audit-item"><span>ID</span> <span>#${tn['EP ID']}</span></div>
+                    <div class="audit-item"><span>Proyecto</span> <span>${tn['PROJECT NAME']}</span></div>
+                    <div class="audit-item"><span>Fecha RE</span> <span>${tn['FECHA RE']}</span></div>
+                </div>
+
+                <div class="links">
+                    <a href="https://wa.me/${tn['Numero de contacto'] || ''}" class="btn btn-wa" target="_blank">WhatsApp</a>
+                    <a href="#" class="btn btn-secondary">Auditoría</a>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', init);
+</script>
 </body>
 </html>

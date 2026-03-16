@@ -1,148 +1,158 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOOL XPERIENCE</title>
 
-<title>AIESEC Experience Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-:root{
---bg:#0b0f14;
---card:rgba(255,255,255,0.05);
---border:rgba(255,255,255,0.1);
---accent:#2f81f7;
---text:#e6edf3;
---dim:#8b949e;
+body{
+font-family:Poppins;
+margin:0;
+background:#f6f7fb;
+display:flex;
 }
 
-body{
-background:linear-gradient(135deg,#05070a,#0b0f14);
-font-family:'Plus Jakarta Sans',sans-serif;
-color:var(--text);
-margin:0;
-padding:30px;
+/* SIDEBAR */
+
+.sidebar{
+width:260px;
+height:100vh;
+background:rgba(255,255,255,0.6);
+backdrop-filter:blur(20px);
+box-shadow:0 0 20px rgba(0,0,0,0.1);
+padding:25px;
+position:fixed;
+}
+
+.sidebar h2{
+color:#ff6a00;
+}
+
+.sidebar button{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:12px;
+background:white;
+box-shadow:6px 6px 12px #d1d1d1,
+-6px -6px 12px #ffffff;
+cursor:pointer;
+transition:0.3s;
+}
+
+.sidebar button:hover{
+box-shadow:0 0 15px #ff6a00;
+}
+
+/* MAIN */
+
+.main{
+margin-left:280px;
+padding:40px;
+width:100%;
 }
 
 .header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:30px;
 }
 
-.logo{
-font-size:22px;
-font-weight:700;
+.title{
+text-align:center;
+width:100%;
+}
+
+.title h1{
+font-size:40px;
+color:#ff6a00;
+text-shadow:0 0 12px #ff6a00;
 }
 
 .search{
-background:var(--card);
-border:1px solid var(--border);
-padding:12px;
-border-radius:10px;
-color:white;
 width:300px;
 }
 
-.stats{
-display:flex;
-gap:15px;
-margin-bottom:25px;
-flex-wrap:wrap;
-}
-
-.stat{
-background:var(--card);
-border:1px solid var(--border);
-padding:10px 18px;
+.search input{
+width:100%;
+padding:12px;
 border-radius:10px;
-font-size:13px;
+border:none;
+box-shadow:inset 3px 3px 6px #d1d1d1,
+inset -3px -3px 6px #fff;
 }
 
-.grid{
+/* BOTONES DASHBOARD */
+
+.cards{
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-gap:20px;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+margin-top:40px;
 }
 
 .card{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:18px;
-padding:20px;
-backdrop-filter:blur(10px);
+padding:30px;
+background:rgba(255,255,255,0.5);
+border-radius:20px;
+backdrop-filter:blur(15px);
+box-shadow:0 0 15px rgba(0,0,0,0.1);
+cursor:pointer;
 transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-6px);
-border-color:var(--accent);
+transform:scale(1.05);
+box-shadow:0 0 20px #ff6a00;
 }
 
-.status{
-font-size:10px;
-font-weight:700;
-padding:4px 10px;
-border-radius:5px;
-float:right;
+/* ESTADISTICAS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+margin-top:40px;
+gap:20px;
 }
 
-.COMPLETED{
-background:rgba(35,134,54,0.2);
-color:#3fb950;
+.stat{
+padding:20px;
+border-radius:15px;
+background:white;
+text-align:center;
+box-shadow:6px 6px 10px #d1d1d1,-6px -6px 10px #fff;
 }
 
-.REALIZED{
-background:rgba(31,111,235,0.2);
-color:#58a6ff;
+/* TABLA */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
 }
 
-.APPROVED{
-background:rgba(210,153,34,0.2);
-color:#d29922;
-}
-
-button{
-background:var(--accent);
-border:none;
-color:white;
-padding:8px 12px;
-border-radius:8px;
-cursor:pointer;
-}
-
-.map{
-height:350px;
-border-radius:20px;
-margin-top:30px;
+th,td{
+padding:10px;
+border-bottom:1px solid #eee;
 }
 
 .section{
-margin-top:40px;
+margin-top:50px;
 }
 
-.doc-btn{
-display:block;
-margin-top:10px;
-background:#1f6feb;
-padding:8px;
-text-align:center;
+.linkbtn{
+background:#ff6a00;
+color:white;
+padding:10px 20px;
 border-radius:8px;
 text-decoration:none;
-color:white;
-font-size:13px;
 }
 
 </style>
@@ -151,268 +161,242 @@ font-size:13px;
 
 <body>
 
-<div class="header">
+<!-- SIDEBAR -->
 
-<div class="logo">🌍 AIESEC Experience Dashboard</div>
+<div class="sidebar">
 
-<input id="searchInput" class="search" placeholder="Buscar TN por nombre, país o ID">
+<h2>TOOL XPERIENCE</h2>
+
+<button onclick="show('ecb')">E.C.B.</button>
+
+<button onclick="show('tns')">TNs</button>
+
+<button onclick="show('buddies')">Buddies</button>
+
+<button onclick="show('familia')">Familia Global</button>
+
+<button onclick="show('otros')">Otros</button>
+
+<button onclick="show('attraction')">Attraction</button>
 
 </div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<div class="header">
+
+<div class="title">
+
+<h1>TOOL XPERIENCE</h1>
+
+<p>Guía de Procesos, Ideas, Carpetas y Gestión de Experience.</p>
+
+</div>
+
+<div class="search">
+
+<input placeholder="Buscar TN, país, EP ID, proyecto, estado">
+
+</div>
+
+</div>
+
+<!-- BOTONES PRINCIPALES -->
+
+<div class="cards">
+
+<div class="card" onclick="show('ecb')">
+<h3>E.C.B.</h3>
+<p>Experience Committee Board</p>
+</div>
+
+<div class="card" onclick="show('tns')">
+<h3>TNs</h3>
+<p>Gestión de Trainees</p>
+</div>
+
+<div class="card" onclick="show('buddies')">
+<h3>Buddies</h3>
+<p>Gestión de acompañamiento</p>
+</div>
+
+<div class="card" onclick="show('familia')">
+<h3>Familia Global</h3>
+<p>Familias anfitrionas</p>
+</div>
+
+<div class="card" onclick="show('otros')">
+<h3>Otros</h3>
+<p>Normas y calendario</p>
+</div>
+
+<div class="card" onclick="show('attraction')">
+<h3>Attraction</h3>
+<p>Ideas y turismo</p>
+</div>
+
+</div>
+
+<!-- ESTADISTICAS -->
 
 <div class="stats">
 
-<div class="stat" id="total"></div>
-<div class="stat" id="completed"></div>
-<div class="stat" id="realized"></div>
-<div class="stat" id="approved"></div>
+<div class="stat">
+<h2 id="total">0</h2>
+<p>Total TNs</p>
+</div>
+
+<div class="stat">
+<h2 id="completed">0</h2>
+<p>Completed</p>
+</div>
+
+<div class="stat">
+<h2 id="realized">0</h2>
+<p>Realized</p>
+</div>
+
+<div class="stat">
+<h2 id="approved">0</h2>
+<p>Approved</p>
+</div>
 
 </div>
 
-<div class="grid" id="container"></div>
+<!-- GRAFICOS -->
 
 <div class="section">
 
-<h2>📊 Estadísticas</h2>
-
-<canvas id="statusChart"></canvas>
+<canvas id="chart"></canvas>
 
 </div>
 
-<div class="section">
+<!-- ECB -->
 
-<h2>🌍 Mapa de TNs</h2>
+<div id="ecb" class="section" style="display:none">
 
-<div id="map" class="map"></div>
+<h2>Experience Committee Board</h2>
 
-</div>
+<p>Gestión de procesos, auditoría y control de la experiencia.</p>
 
-<div class="section">
-
-<h2>👥 Buddies</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Buddy 1</h3>
-<p>Universidad UMSA</p>
-<button>WhatsApp</button>
-</div>
-
-<div class="card">
-<h3>Buddy 2</h3>
-<p>Universidad UCB</p>
-<button>WhatsApp</button>
-</div>
+<a class="linkbtn" href="https://drive.google.com/file/d/1DB2SgFyDNFDP_74QIntr9bjaK6oXhJMk/view" target="_blank">Abrir Booklet ECB</a>
 
 </div>
 
-</div>
+<!-- TNS -->
 
-<div class="section">
+<div id="tns" class="section" style="display:none">
 
-<h2>🏠 Familias Globales</h2>
+<h2>TNs</h2>
 
-<div class="grid">
+<a class="linkbtn" href="https://docs.google.com/spreadsheets/d/1lm-dnfHMbVA2lGxxgVKqni5nRV93jw8cg62iyd3MaW8/edit?gid=0#gid=0" target="_blank">
 
-<div class="card">
-<h3>Familia Rodriguez</h3>
-<p>Capacidad: 2 TNs</p>
-</div>
+Abrir Datos TNs
 
-<div class="card">
-<h3>Familia Quispe</h3>
-<p>Capacidad: 1 TN</p>
-</div>
+</a>
 
 </div>
 
-</div>
+<!-- BUDDIES -->
 
-<div class="section">
+<div id="buddies" class="section" style="display:none">
 
-<h2>🧠 Attraction</h2>
+<h2>Buddies</h2>
 
-<div class="grid">
+<a class="linkbtn" href="https://docs.google.com/forms/d/12LuXpC3-ASuBRVvLTLa7QrbJLLkZqLblucQ_dSj4-9Y/viewform" target="_blank">
 
-<div class="card">
-<h3>🍲 Comida típica</h3>
-<p>Ideas gastronómicas para TNs</p>
-</div>
+Formulario Aplicación
 
-<div class="card">
-<h3>🗺 Rutas turísticas</h3>
-<p>Lugares para visitar</p>
-</div>
-
-<div class="card">
-<h3>🎉 Ideas bienvenida</h3>
-<p>Actividades culturales</p>
-</div>
+</a>
 
 </div>
 
+<!-- FAMILIA GLOBAL -->
+
+<div id="familia" class="section" style="display:none">
+
+<h2>Familia Global</h2>
+
+<a class="linkbtn" href="https://www.canva.com/design/DAGmfmofgSs/nuGUyRLIbEkxNl8U7nSHTg/edit">
+
+Abrir Booklet
+
+</a>
+
 </div>
 
-<div class="section">
+<!-- OTROS -->
 
-<h2>📂 Documentos</h2>
+<div id="otros" class="section" style="display:none">
 
-<a href="#" class="doc-btn">Booklet ECB</a>
-<a href="#" class="doc-btn">Normas de intercambio</a>
-<a href="#" class="doc-btn">Formulario Buddies</a>
+<h2>Otros</h2>
+
+<a class="linkbtn" href="https://docs.google.com/spreadsheets/d/1dA-VawdfPJUU0y8AWjCvn9hUyHiQbTi6C-aMEh68n0E/edit">
+
+Calendario
+
+</a>
+
+</div>
+
+<!-- ATTRACTION -->
+
+<div id="attraction" class="section" style="display:none">
+
+<h2>Attraction</h2>
+
+<a class="linkbtn" href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit">
+
+Ideas
+
+</a>
+
+</div>
 
 </div>
 
 <script>
 
-const CSV_URL = "https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/export?format=csv&gid=984632049"
+function show(section){
 
-let allData = []
+document.querySelectorAll(".section").forEach(s=>{
 
-function init(){
-
-Papa.parse(CSV_URL,{
-download:true,
-header:true,
-skipEmptyLines:true,
-
-complete:function(results){
-
-allData = results.data
-
-updateStats()
-
-render(allData)
-
-createChart()
-
-initMap()
-
-}
+s.style.display="none"
 
 })
 
-}
-
-function normalizeStatus(status){
-
-if(!status) return "APPROVED"
-
-return status.trim().toUpperCase()
+document.getElementById(section).style.display="block"
 
 }
 
-function updateStats(){
+/* GRAFICO EJEMPLO */
 
-const total = allData.length
-
-const completed = allData.filter(t=>normalizeStatus(t.STATUS)==="COMPLETED").length
-const realized = allData.filter(t=>normalizeStatus(t.STATUS)==="REALIZED").length
-const approved = allData.filter(t=>normalizeStatus(t.STATUS)==="APPROVED").length
-
-document.getElementById("total").innerText="Total TNs: "+total
-document.getElementById("completed").innerText="Completed: "+completed
-document.getElementById("realized").innerText="Realized: "+realized
-document.getElementById("approved").innerText="Approved: "+approved
-
-}
-
-function render(data){
-
-const container = document.getElementById("container")
-
-container.innerHTML=""
-
-data.forEach(tn=>{
-
-const name = tn["EP/OP NAME"] || "Sin nombre"
-const country = tn["MC HOME"] || "Sin país"
-const id = tn["EP ID"] || "-"
-const project = tn["PROJECT NAME"] || "-"
-const status = normalizeStatus(tn["STATUS"])
-
-container.innerHTML+=`
-
-<div class="card">
-
-<span class="status ${status}">${status}</span>
-
-<h3>${name}</h3>
-
-<p style="font-size:12px;color:#8b949e">
-
-${country} | ID: ${id}
-
-</p>
-
-<p style="font-size:12px">
-
-Proyecto: ${project}
-
-</p>
-
-</div>
-
-`
-
-})
-
-}
-
-document.getElementById("searchInput").addEventListener("input",(e)=>{
-
-const val = e.target.value.toLowerCase()
-
-const filtered = allData.filter(tn=>
-
-(tn["EP/OP NAME"]||"").toLowerCase().includes(val) ||
-
-(tn["MC HOME"]||"").toLowerCase().includes(val) ||
-
-(tn["EP ID"]||"").toString().includes(val)
-
-)
-
-render(filtered)
-
-})
-
-function createChart(){
-
-const completed = allData.filter(t=>normalizeStatus(t.STATUS)==="COMPLETED").length
-const realized = allData.filter(t=>normalizeStatus(t.STATUS)==="REALIZED").length
-const approved = allData.filter(t=>normalizeStatus(t.STATUS)==="APPROVED").length
-
-const ctx = document.getElementById("statusChart")
+const ctx=document.getElementById('chart');
 
 new Chart(ctx,{
-type:'doughnut',
+
+type:'bar',
+
 data:{
-labels:['Completed','Realized','Approved'],
+
+labels:['Realized','Finished','Completed'],
+
 datasets:[{
-data:[completed,realized,approved]
+
+label:'TNs',
+
+data:[12,8,5]
+
 }]
+
 }
+
 })
-
-}
-
-function initMap(){
-
-var map = L.map('map').setView([20,0],2)
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-maxZoom:18
-}).addTo(map)
-
-L.marker([-16.5,-68.15]).addTo(map)
-.bindPopup("La Paz - AIESEC")
-
-}
-
-window.onload = init
 
 </script>
 
 </body>
+
 </html>

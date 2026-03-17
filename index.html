@@ -58,14 +58,16 @@
         .hero-section p { font-size: 16px; color: var(--text-gray); max-width: 600px; margin: 15px auto; }
 
         /* --- BUSCADOR --- */
-        .search-container { display: flex; justify-content: flex-end; margin-bottom: 40px; position: relative; }
-        .search-box {
-            width: 350px; padding: 15px 25px; border-radius: 50px; border: none;
-            background: var(--glass-white); box-shadow: var(--neumorph); outline: none;
+                .search-wrapper { position: relative; margin-bottom: 30px; display: flex; justify-content: flex-end; }
+        .search-bar {
+            width: 300px; padding: 12px 20px; border-radius: 20px; border: none;
+            background: var(--glass-white); box-shadow: var(--neumorph-light);
+            outline: none; font-size: 14px;
         }
-        #search-results {
-            position: absolute; top: 60px; right: 0; width: 350px; background: white;
-            border-radius: 20px; box-shadow: var(--shadow-glass); z-index: 100; display: none; padding: 15px;
+        #results-box {
+            position: absolute; top: 55px; right: 0; width: 300px;
+            background: white; border-radius: 15px; z-index: 1000;
+            box-shadow: var(--shadow-soft); display: none; padding: 15px;
         }
 
         /* --- ESTADÍSTICAS --- */
@@ -181,14 +183,14 @@
                 <a href="https://drive.google.com/drive/folders/19RPTxDFauXHWjBm_D4t6CebWZbu72V7x" class="sub-button" target="_blank">
                     CARPETA TNs <span>Análisis y resumen de sesiones educativas.</span>
                 </a>
-                <a href="https://www.canva.com/design/DAFqyLAfyxk/pQkUH7JSHjLnf_RvWpIqDg/edit" class="sub-button" target="_blank">
+                <a href="https://www.canva.com/design/DAFqyLAfyxk/pQkUH7JSHjLnf_RvWpIqDg/edit" class="sub-button" target="_blank">
                     _CERTIFICADOS TNs <span>Diseño y entrega de acreditaciones.</span>
                 </a>
                 <a href="https://drive.google.com/drive/folders/1K87UCJSfcOfTMYScv49pbZppya0feQP8" class="sub-button" target="_blank">
                     _SHOWCASING BUDDIES <span>Galería de fotos y evidencias.</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=1768148759#gid=1768148759" class="sub-button" target="_blank">
-                   FAMILIAS GLOBALES <span>Galería de fotos y evidencias.</span>
+                    FAMILIAS GLOBALES <span>Galería de fotos y evidencias.</span>
                 </a>
             </div>
         </div>

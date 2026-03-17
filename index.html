@@ -1,523 +1,383 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOOL XPERIENCE | Daily Insider</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-main: #E8EDF2;
+            --bg-container: #DDE3E9;
+            --glass-white: rgba(255, 255, 255, 0.6);
+            --accent-blue: #3B82F6;
+            --accent-orange: #FF7800;
+            --text-dark: #111827;
+            --text-gray: #4B5563;
+            --shadow: 0px 25px 60px rgba(0,0,0,0.08);
+            --neumorph-shadow: 8px 8px 16px rgba(0,0,0,0.1), -8px -8px 16px rgba(255,255,255,0.6);
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        body {
+            margin: 0;
+            background: linear-gradient(120deg, var(--bg-main), #DEE4EA);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
 
-<title>TOOL XPERIENCE</title>
+        /* --- CONTENEDOR PRINCIPAL FLOTANTE --- */
+        .main-card {
+            width: 92%;
+            max-width: 1280px;
+            margin: 40px auto;
+            background: var(--bg-container);
+            border-radius: 32px;
+            box-shadow: var(--shadow);
+            padding: 40px;
+            min-height: 90vh;
+            position: relative;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        /* --- HEADER EDITORIAL --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            margin-bottom: 40px;
+        }
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 20px;
+            color: #2C3440;
+        }
 
-<style>
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #2C3440;
+            border-radius: 50%;
+        }
 
-body{
-margin:0;
-font-family:Inter;
-background:linear-gradient(120deg,#e8edf2,#dee4ea);
-color:#1f2937;
-}
+        .nav-center {
+            display: flex;
+            gap: 32px;
+        }
 
-.container{
-width:92%;
-max-width:1280px;
-margin:auto;
-margin-top:40px;
-margin-bottom:40px;
-padding:60px;
-border-radius:30px;
-background:#dde3e9;
-box-shadow:0 25px 60px rgba(0,0,0,0.08);
-}
+        .nav-center a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.25s;
+        }
 
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:40px;
-}
+        .nav-center a:hover { color: var(--accent-blue); }
 
-.logo{
-font-size:22px;
-font-weight:800;
-}
+        /* --- SEARCH BAR --- */
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
 
-.search{
-padding:12px 16px;
-border-radius:14px;
-border:none;
-outline:none;
-background:white;
-box-shadow:0 8px 20px rgba(0,0,0,0.08);
-}
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: none;
+            background: #FFFFFF;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+            outline: none;
+        }
 
-.hero{
-text-align:center;
-margin-bottom:50px;
-}
+        /* --- HERO SECTION --- */
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
 
-.hero h1{
-font-size:48px;
-margin:0;
-font-weight:800;
-}
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin: 0;
+            color: var(--text-dark);
+        }
 
-.hero p{
-margin-top:10px;
-font-size:15px;
-color:#6b7280;
-}
+        .hero p {
+            color: var(--text-gray);
+            font-size: 15px;
+            margin-top: 10px;
+        }
 
-.stats{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-margin-bottom:50px;
-}
+        /* --- BROWSER RESULTS (DYNAMIC) --- */
+        #search-results {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
 
-.stat{
-flex:1;
-min-width:180px;
-padding:25px;
-border-radius:20px;
+        /* --- DASHBOARD GRID & BUTTONS --- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
 
-background:rgba(255,255,255,0.35);
-backdrop-filter:blur(18px);
+        .btn-main {
+            background: var(--glass-white);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 24px;
+            padding: 30px;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--neumorph-shadow);
+            position: relative;
+        }
 
-box-shadow:
-8px 8px 16px rgba(0,0,0,0.1),
--8px -8px 16px rgba(255,255,255,0.6);
+        .btn-main:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 25px rgba(255, 120, 0, 0.3);
+            border-color: var(--accent-orange);
+        }
 
-transition:0.3s;
-}
+        .btn-main h3 { margin: 0; font-size: 22px; color: var(--text-dark); }
+        .btn-main p { font-size: 13px; color: var(--text-gray); margin: 8px 0 0 0; }
 
-.stat:hover{
-transform:translateY(-5px);
-}
+        /* --- SUBMENU SLIDE-DOWN --- */
+        .submenu {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            animation: slideDown 0.4s ease forwards;
+        }
 
-.stat h2{
-margin:0;
-font-size:26px;
-}
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.stat p{
-margin:0;
-font-size:13px;
-color:#6b7280;
-}
+        .sub-btn {
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 13px;
+            font-weight: 600;
+            background: #F8FAFC;
+            transition: 0.2s;
+            border-left: 3px solid transparent;
+        }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-margin-bottom:50px;
-}
+        .sub-btn:hover {
+            background: #F1F5F9;
+            border-left: 3px solid var(--accent-orange);
+            padding-left: 18px;
+        }
 
-.card{
-padding:30px;
-border-radius:22px;
+        .sub-desc {
+            display: block;
+            font-size: 11px;
+            color: var(--text-gray);
+            font-weight: 400;
+            margin-top: 2px;
+        }
 
-background:rgba(255,255,255,0.4);
-backdrop-filter:blur(20px);
+        /* --- STATS & CHARTS --- */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
 
-box-shadow:
-8px 8px 18px rgba(0,0,0,0.08),
--8px -8px 18px rgba(255,255,255,0.7);
+        .stat-box {
+            background: var(--glass-white);
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
 
-transition:0.3s;
-cursor:pointer;
-}
+        .stat-box h2 { margin: 0; font-size: 28px; color: var(--accent-orange); }
+        .stat-box span { font-size: 12px; font-weight: 700; color: var(--text-gray); }
 
-.card:hover{
-transform:translateY(-6px);
-box-shadow:
-0 0 20px rgba(255,120,0,0.2);
-}
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
 
-.card h3{
-margin:0;
-font-size:20px;
-}
+        .chart-item {
+            background: white;
+            padding: 20px;
+            border-radius: 24px;
+            height: 250px;
+        }
 
-.card p{
-font-size:13px;
-color:#6b7280;
-margin-top:6px;
-}
-
-.section{
-margin-top:50px;
-}
-
-.section h2{
-font-size:32px;
-margin-bottom:10px;
-}
-
-.section p{
-color:#6b7280;
-margin-bottom:30px;
-}
-
-.subgrid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-.subcard{
-padding:22px;
-border-radius:18px;
-
-background:rgba(255,255,255,0.45);
-backdrop-filter:blur(15px);
-
-box-shadow:
-6px 6px 14px rgba(0,0,0,0.08),
--6px -6px 14px rgba(255,255,255,0.6);
-
-transition:0.25s;
-}
-
-.subcard:hover{
-transform:translateY(-4px);
-box-shadow:0 0 15px rgba(255,120,0,0.25);
-}
-
-.subcard h4{
-margin:0;
-font-size:17px;
-}
-
-.subcard p{
-margin-top:6px;
-font-size:13px;
-color:#6b7280;
-}
-
-.btn{
-display:inline-block;
-margin-top:12px;
-padding:8px 14px;
-border-radius:10px;
-background:white;
-text-decoration:none;
-font-size:12px;
-color:#111;
-box-shadow:0 6px 14px rgba(0,0,0,0.1);
-}
-
-.result{
-margin-top:30px;
-padding:20px;
-border-radius:18px;
-background:white;
-display:none;
-}
-
-canvas{
-margin-top:40px;
-}
-
-</style>
+    </style>
 </head>
-
 <body>
 
-<div class="container">
-
-<header>
-
-<div class="logo">TOOL XPERIENCE</div>
-
-<input class="search" id="search" placeholder="Buscar TN, País, EP ID, Proyecto">
-
-</header>
-
-<div class="hero">
-
-<h1>TOOL XPERIENCE</h1>
-
-<p>
-Guía de Procesos, Ideas, Carpetas y Gestión de Experience.
-</p>
-
-</div>
-
-<div class="stats">
-
-<div class="stat">
-<h2 id="total">0</h2>
-<p>Total TNs</p>
-</div>
-
-<div class="stat">
-<h2 id="completed">0</h2>
-<p>Completed</p>
-</div>
-
-<div class="stat">
-<h2 id="realized">0</h2>
-<p>Realized</p>
-</div>
-
-<div class="stat">
-<h2 id="approved">0</h2>
-<p>Approved</p>
-</div>
-
-</div>
-
-<div class="grid">
-
-<div class="card" onclick="openSection('ecb')">
-<h3>E.C.B.</h3>
-<p>Experience Committee Board</p>
-</div>
-
-<div class="card" onclick="openSection('tns')">
-<h3>TNs</h3>
-<p>Gestión de trainees</p>
-</div>
-
-<div class="card" onclick="openSection('buddies')">
-<h3>Buddies</h3>
-<p>Gestión de acompañamiento</p>
-</div>
-
-<div class="card" onclick="openSection('familia')">
-<h3>Familia Global</h3>
-<p>Gestión de host families</p>
-</div>
-
-<div class="card" onclick="openSection('otros')">
-<h3>Otros</h3>
-<p>Recursos del programa</p>
-</div>
-
-<div class="card" onclick="openSection('attraction')">
-<h3>Attraction</h3>
-<p>Ideas de promoción</p>
-</div>
-
-</div>
-
-<div id="result" class="result"></div>
-
-<!-- ECB -->
-
-<div id="ecb" class="section" style="display:none">
-
-<h2>E.C.B.</h2>
-
-<p>
-Gestión de procesos, auditoría y control de la experiencia del programa.
-Este módulo centraliza guías operativas y auditorías.
-</p>
-
-<div class="subgrid">
-
-<div class="subcard">
-
-<h4>Booklet E.C.B.</h4>
-
-<p>Guía general del área Experience.</p>
-
-<a class="btn" target="_blank"
-href="https://drive.google.com/file/d/1DB2SgFyDNFDP_74QIntr9bjaK6oXhJMk/view">Abrir</a>
-
-</div>
-
-<div class="subcard">
-
-<h4>Procesos de Auditoría</h4>
-
-<p>Procedimientos de control del programa.</p>
-
-<a class="btn" target="_blank"
-href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=0">Abrir</a>
-
-</div>
-
-<div class="subcard">
-
-<h4>Control de TNs</h4>
-
-<p>Seguimiento de experiencias.</p>
-
-<a class="btn" target="_blank"
-href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=82050771">Abrir</a>
-
-</div>
-
-<div class="subcard">
-
-<h4>Documentos TNs</h4>
-
-<p>Repositorio del programa.</p>
-
-<a class="btn" target="_blank"
-href="https://drive.google.com/drive/folders/19RPTxDFauXHWjBm_D4t6CebWZbu72V7x">Abrir</a>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- BUDDIES -->
-
-<div id="buddies" class="section" style="display:none">
-
-<h2>Buddies</h2>
-
-<p>
-Sistema de acompañamiento para trainees.
-</p>
-
-<div class="subgrid">
-
-<div class="subcard">
-
-<h4>Evaluación Buddies</h4>
-
-<p>Criterios de selección.</p>
-
-<a class="btn"
-target="_blank"
-href="https://docs.google.com/document/d/1LyehSH6YrOIA3VfI9xUQcy-5qYLo0LOFTB8hGutdnsA/edit">Abrir</a>
-
-</div>
-
-<div class="subcard">
-
-<h4>Formulario Buddies</h4>
-
-<p>Aplicación de voluntarios.</p>
-
-<a class="btn"
-target="_blank"
-href="https://docs.google.com/forms/d/12LuXpC3-ASuBRVvLTLa7QrbJLLkZqLblucQ_dSj4-9Y/viewform">Abrir</a>
-
-</div>
-
-<div class="subcard">
-
-<h4>Agradecimientos a Buddies</h4>
-
-<p>Reconocimiento visual.</p>
-
-<a class="btn"
-target="_blank"
-href="https://www.canva.com/design/DAGkQsz7a7A/bNmeSp4PfSgkKrDdP6l2CA/edit">Abrir</a>
-
-</div>
-
-</div>
-
-</div>
-
-<canvas id="countryChart"></canvas>
-
-<canvas id="statusChart"></canvas>
-
-<canvas id="locationChart"></canvas>
-
+<div class="main-card">
+    <header>
+        <div class="logo">
+            <div class="logo-icon"></div>
+            Daily Insider
+        </div>
+        <div class="nav-center">
+            <a href="#">Education</a>
+            <a href="#">Resources</a>
+            <a href="#">Vacancy</a>
+            <a href="#">Go Pro</a>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Buscar TN, País, ID, Proyecto...">
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>TOOL XPERIENCE</h1>
+        <p>Guía de Procesos, Ideas, Carpetas y Gestión de Experience.</p>
+    </div>
+
+    <div id="search-results"></div>
+
+    <div class="stats-row">
+        <div class="stat-box"><h2 id="total-val">19</h2><span>TOTAL TNs</span></div>
+        <div class="stat-box"><h2 id="comp-val">2</h2><span>COMPLETED</span></div>
+        <div class="stat-box"><h2 id="real-val">8</h2><span>REALIZED</span></div>
+        <div class="stat-box"><h2 id="app-val">9</h2><span>APPROVED</span></div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="btn-main" onclick="toggleMenu(event, 'm-ecb')">
+            <h3>E.C.B.</h3>
+            <p>Experience Committee Board: Gestión de auditoría y procesos.</p>
+            <div id="m-ecb" class="submenu">
+                <a href="https://drive.google.com/file/d/1DB2SgFyDNFDP_74QIntr9bjaK6oXhJMk/view" target="_blank" class="sub-btn">
+                    Booklet E.C.B. <span class="sub-desc">Guía general del área Experience.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=0" target="_blank" class="sub-btn">
+                    Procesos de Auditoría <span class="sub-desc">RE, FI y CO - Gestión de documentos.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=82050771" target="_blank" class="sub-btn">
+                    Control de TNs y Auditorías <span class="sub-desc">Seguimiento detallado de cada voluntario.</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="btn-main" onclick="toggleMenu(event, 'm-tns')">
+            <h3>TNs</h3>
+            <p>Gestión de trainees, documentos y bases de datos.</p>
+            <div id="m-tns" class="submenu">
+                <a href="https://docs.google.com/spreadsheets/d/1lm-dnfHMbVA2lGxxgVKqni5nRV93jw8cg62iyd3MaW8/edit?gid=0" target="_blank" class="sub-btn">Datos TNs <span class="sub-desc">EP ID, Proyectos y Fechas.</span></a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=1672732825" target="_blank" class="sub-btn">Lead Space <span class="sub-desc">Resumen y presentaciones.</span></a>
+                <a href="https://www.canva.com/design/DAFqyLAfyxk/pQkUH7JSHjLnf_RvWpIqDg/edit" target="_blank" class="sub-btn">Certificados <span class="sub-desc">Generación de reconocimientos.</span></a>
+            </div>
+        </div>
+
+        <div class="btn-main" onclick="toggleMenu(event, 'm-buddies')">
+            <h3>Buddies</h3>
+            <p>Acompañamiento, reportes y formularios de aplicación.</p>
+            <div id="m-buddies" class="submenu">
+                <a href="https://docs.google.com/document/d/1LyehSH6YrOIA3VfI9xUQcy-5qYLo0LOFTB8hGutdnsA/edit" target="_blank" class="sub-btn">Evaluación Buddies <span class="sub-desc">Criterios de elección.</span></a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=2098444727" target="_blank" class="sub-btn">Reportes Golden Sunrise <span class="sub-desc">Seguimiento semanal de experiencia.</span></a>
+                <a href="https://www.canva.com/design/DAGkQsz7a7A/bNmeSp4PfSgkKrDdP6l2CA/edit" target="_blank" class="sub-btn">Agradecimientos <span class="sub-desc">Reconocimiento visual en Canva.</span></a>
+            </div>
+        </div>
+
+        <div class="btn-main" onclick="toggleMenu(event, 'm-att')">
+            <h3>Attraction</h3>
+            <p>Estrategias de promoción, lugares y cultura local.</p>
+            <div id="m-att" class="submenu">
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=1566107400" target="_blank" class="sub-btn">Lugares a Visitar <span class="sub-desc">Guía turística de La Paz.</span></a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=1797585253" target="_blank" class="sub-btn">Comida Típica <span class="sub-desc">Gastronomía recomendada.</span></a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=1050707538" target="_blank" class="sub-btn">Ideas S.A.S <span class="sub-desc">Estrategias de difusión.</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="charts-container">
+        <div class="chart-item"><canvas id="chartPais"></canvas></div>
+        <div class="chart-item"><canvas id="chartStatus"></canvas></div>
+        <div class="chart-item"><canvas id="chartLugar"></canvas></div>
+    </div>
 </div>
 
 <script>
+    // --- Lógica de Menús ---
+    function toggleMenu(event, id) {
+        event.stopPropagation();
+        const menus = document.querySelectorAll('.submenu');
+        menus.forEach(m => { if(m.id !== id) m.style.display = 'none'; });
+        const target = document.getElementById(id);
+        target.style.display = target.style.display === 'flex' ? 'none' : 'flex';
+    }
 
-function openSection(id){
+    document.onclick = function() {
+        document.querySelectorAll('.submenu').forEach(m => m.style.display = 'none');
+    }
 
-document.querySelectorAll(".section").forEach(s=>s.style.display="none")
+    // --- Lógica del Buscador ---
+    const db = [
+        {name: "Lara Keroline", country: "Brasil", id: "5608844", project: "Heartbeat", status: "Completed"},
+        {name: "Frida Mendez", country: "Mexico", id: "5647895", project: "Green Leaders", status: "Completed"},
+        {name: "Ana Cândida", country: "Brasil", id: "5608102", project: "Heartbeat", status: "Realized"}
+    ];
 
-document.getElementById(id).style.display="block"
+    const input = document.getElementById('searchInput');
+    const resultsDiv = document.getElementById('search-results');
 
-window.scrollTo({top:700,behavior:"smooth"})
+    input.addEventListener('input', (e) => {
+        const val = e.target.value.toLowerCase();
+        if(val.length < 1) { resultsDiv.style.display = 'none'; return; }
+        
+        const filter = db.filter(x => x.name.toLowerCase().includes(val) || x.country.toLowerCase().includes(val) || x.id.includes(val));
+        
+        if(filter.length > 0) {
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = filter.map(x => `
+                <div style="border-bottom:1px solid #eee; padding:10px 0;">
+                    <strong>${x.name}</strong> - ${x.country} | ID: ${x.id} | <span style="color:#FF7800">${x.status}</span>
+                </div>
+            `).join('');
+        } else {
+            resultsDiv.style.display = 'none';
+        }
+    });
 
-}
+    // --- Gráficos (Chart.js) ---
+    function createChart(id, type, labels, data, label, colors) {
+        new Chart(document.getElementById(id), {
+            type: type,
+            data: {
+                labels: labels,
+                datasets: [{ label: label, data: data, backgroundColor: colors }]
+            },
+            options: { maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: {size: 10}} } } }
+        });
+    }
 
-const dataSample=[
-
-{name:"Anna",country:"Germany",status:"Completed",location:"La Paz"},
-{name:"John",country:"Brazil",status:"Realized",location:"Cochabamba"},
-{name:"Maria",country:"France",status:"Approved",location:"La Paz"},
-{name:"Luis",country:"Brazil",status:"Completed",location:"Santa Cruz"}
-
-]
-
-document.getElementById("total").innerText=dataSample.length
-
-document.getElementById("completed").innerText=dataSample.filter(x=>x.status=="Completed").length
-
-document.getElementById("realized").innerText=dataSample.filter(x=>x.status=="Realized").length
-
-document.getElementById("approved").innerText=dataSample.filter(x=>x.status=="Approved").length
-
-const search=document.getElementById("search")
-
-search.addEventListener("input",()=>{
-
-const val=search.value.toLowerCase()
-
-const r=dataSample.filter(x=>
-
-x.name.toLowerCase().includes(val)||
-x.country.toLowerCase().includes(val)||
-x.status.toLowerCase().includes(val)
-
-)
-
-const box=document.getElementById("result")
-
-if(val===""){box.style.display="none";return}
-
-box.style.display="block"
-
-box.innerHTML=r.map(x=>`
-<div>
-
-<strong>${x.name}</strong>
-<br>
-País: ${x.country}
-<br>
-Estado: ${x.status}
-<br>
-Lugar: ${x.location}
-
-</div>
-`).join("<hr>")
-
-})
-
-const countryChart=new Chart(document.getElementById("countryChart"),{
-type:"bar",
-data:{
-labels:["Germany","Brazil","France"],
-datasets:[{data:[1,2,1]}]
-}
-})
-
-const statusChart=new Chart(document.getElementById("statusChart"),{
-type:"pie",
-data:{
-labels:["Completed","Realized","Approved"],
-datasets:[{data:[2,1,1]}]
-}
-})
-
-const locationChart=new Chart(document.getElementById("locationChart"),{
-type:"bar",
-data:{
-labels:["La Paz","Cochabamba","Santa Cruz"],
-datasets:[{data:[2,1,1]}]
-}
-})
+    createChart('chartPais', 'pie', ['Brasil', 'México', 'Colombia', 'Otros'], [12, 4, 2, 1], 'Por País', ['#3B82F6', '#60A5FA', '#93C5FD', '#BFDBFE']);
+    createChart('chartStatus', 'doughnut', ['Completed', 'Realized', 'Approved'], [2, 8, 9], 'Por Estatus', ['#10B981', '#3B82F6', '#F59E0B']);
+    createChart('chartLugar', 'bar', ['San Ramón', 'Albergue', 'ONG'], [15, 3, 1], 'Por Lugar', ['#FF7800']);
 
 </script>
-
 </body>
 </html>

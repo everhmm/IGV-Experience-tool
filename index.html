@@ -58,14 +58,14 @@
         .hero-section p { font-size: 16px; color: var(--text-gray); max-width: 600px; margin: 15px auto; }
 
         /* --- BUSCADOR --- */
-        .search-container { display: flex; justify-content: flex-end; margin-bottom: 40px; position: relative; }
-        .search-box {
-            width: 350px; padding: 15px 25px; border-radius: 50px; border: none;
-            background: var(--glass-white); box-shadow: var(--neumorph); outline: none;
-        }
+       .search-wrapper { position: relative; margin-bottom: 30px; display: flex; justify-content: flex-end; }
+        .search-bar {
+            width: 300px; padding: 12px 20px; border-radius: 20px; border: none;
+            background: var(--glass-white); box-shadow: var(--neumorph-light);
+            outline: none; font-size: 14px;
         #search-results {
-            position: absolute; top: 60px; right: 0; width: 350px; background: white;
-            border-radius: 20px; box-shadow: var(--shadow-glass); z-index: 100; display: none; padding: 15px;
+            position: absolute; top: 55px; right: 0; width: 350px; background: white;
+            border-radius: 20px; box-shadow: var(--shadow-glass); z-index: 1000; display: none; padding: 15px;
         }
 
         /* --- ESTADÍSTICAS --- */
@@ -148,16 +148,16 @@
             <p class="desc">Experience Committee Board: Gestión de procesos, auditoría y control de la experiencia del programa.</p>
             <div id="menu-ecb" class="submenu-wrapper">
                 <a href="https://drive.google.com/file/d/1DB2SgFyDNFDP_74QIntr9bjaK6oXhJMk/view" class="sub-button" target="_blank">
-                    _Booklet E.C.B. <span>Guía general del área Experience.</span>
+                    Booklet E.C.B. <span>Guía general del área Experience.</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=0" class="sub-button" target="_blank">
-                    _Procesos de Auditoría <span>RE, FI, CO y cuadros de datos dinámicos.</span>
+                    Procesos de Auditoría <span>RE, FI, CO y cuadros de datos dinámicos.</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=82050771" class="sub-button" target="_blank">
-                    _Control de TNs y Auditorías <span>Seguimiento de metas y estatus por EP/OP.</span>
+                    Control de TNs y Auditorías <span>Seguimiento de metas y estatus por EP/OP.</span>
                 </a>
                 <a href="https://drive.google.com/drive/folders/19RPTxDFauXHWjBm_D4t6CebWZbu72V7x" class="sub-button" target="_blank">
-                    _Documentos de TNs <span>Archivos base del programa y plantillas.</span>
+                    Documentos de TNs <span>Archivos base del programa y plantillas.</span>
                 </a>
             </div>
         </div>
@@ -167,22 +167,28 @@
             <p class="desc">Módulo de gestión directa del Trainee: Fechas, logística, certificados y espacios LEAD.</p>
             <div id="menu-tns" class="submenu-wrapper">
                 <a href="https://docs.google.com/spreadsheets/d/1lm-dnfHMbVA2lGxxgVKqni5nRV93jw8cg62iyd3MaW8/edit" class="sub-button" target="_blank">
-                    _DATOS DEL TNs <span>Panel de IDs, fechas de llegada/salida y estado.</span>
+                    DATOS DEL TNs <span>Panel de IDs, fechas de llegada/salida y estado.</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1566107400" class="sub-button" target="_blank">
-                    _PROPUESTAS DE LUGARES <span>Destinos recomendados para visitas de TNs.</span>
+                    PROPUESTAS DE LUGARES <span>Destinos recomendados para visitas de TNs.</span>
                 </a>
                 <a href="https://drive.google.com/drive/folders/1Jzv54ZdGwVnGH-C7J3EGT7MxHSbnKxOM" class="sub-button" target="_blank">
-                    _DOCUMENTOS EN BORRADOR <span>Archivos en proceso de edición.</span>
+                    DOCUMENTOS EN BORRADOR <span>Archivos en proceso de edición.</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1672732825" class="sub-button" target="_blank">
-                    _LEAD SPACE <span>Análisis y resumen de sesiones educativas.</span>
+                    LEAD SPACE <span>Análisis y resumen de sesiones educativas.</span>
+                 </a>
+                <a href="https://drive.google.com/drive/folders/19RPTxDFauXHWjBm_D4t6CebWZbu72V7x?usp=drive_link" class="sub-button" target="_blank">
+                   CARPETA TNs <span>Análisis y resumen de sesiones educativas.</span>
                 </a>
                 <a href="https://www.canva.com/design/DAFqyLAfyxk/pQkUH7JSHjLnf_RvWpIqDg/edit" class="sub-button" target="_blank">
-                    _CERTIFICADOS TNs <span>Diseño y entrega de acreditaciones.</span>
+                    CERTIFICADOS TNs <span>Diseño y entrega de acreditaciones.</span>
                 </a>
                 <a href="https://drive.google.com/drive/folders/1K87UCJSfcOfTMYScv49pbZppya0feQP8" class="sub-button" target="_blank">
-                    _SHOWCASING BUDDIES <span>Galería de fotos y evidencias.</span>
+                    SHOWCASING BUDDIES <span>Galería de fotos y evidencias.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=1768148759#gid=1768148759" class="sub-button" target="_blank">
+                    FAMILIAS GLOBALES <span>Galería de fotos y evidencias.</span>
                 </a>
             </div>
         </div>
@@ -192,16 +198,16 @@
             <p class="desc">Gestión del programa de acompañamiento: Evaluaciones, reportes y reconocimientos.</p>
             <div id="menu-buddies" class="submenu-wrapper">
                 <a href="https://docs.google.com/document/d/1LyehSH6YrOIA3VfI9xUQcy-5qYLo0LOFTB8hGutdnsA/edit" class="sub-button" target="_blank">
-                    _EVALUACIÓN ELECCIÓN <span>Criterios de selección para nuevos buddies.</span>
+                    EVALUACIÓN ELECCIÓN <span>Criterios de selección para nuevos buddies.</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=2098444727" class="sub-button" target="_blank">
-                    _REPORTES EXPERIENCIAS <span>Reportes detallados (Golden Sunrise).</span>
+                    REPORTES EXPERIENCIAS <span>Reportes detallados (Golden Sunrise).</span>
                 </a>
                 <a href="https://docs.google.com/forms/d/12LuXpC3-ASuBRVvLTLa7QrbJLLkZqLblucQ_dSj4-9Y/viewform" class="sub-button" target="_blank">
-                    _FORMULARIO APLICACIÓN <span>Link directo para postulación de voluntarios.</span>
+                    FORMULARIO APLICACIÓN <span>Link directo para postulación de voluntarios.</span>
                 </a>
                 <a href="https://www.canva.com/design/DAGkQsz7a7A/bNmeSp4PfSgkKrDdP6l2CA/edit" class="sub-button" target="_blank">
-                    _AGRADECIMIENTOS <span>Material visual de reconocimiento.</span>
+                    AGRADECIMIENTOS <span>Material visual de reconocimiento.</span>
                 </a>
             </div>
         </div>
@@ -211,10 +217,10 @@
             <p class="desc">Gestión de familias anfitrionas: Booklets informativos y materiales de difusión.</p>
             <div id="menu-fam" class="submenu-wrapper">
                 <a href="https://www.canva.com/design/DAGmfmofgSs/nuGUyRLIbEkxNl8U7nSHTg/edit" class="sub-button" target="_blank">
-                    _BOOKLET FAMILIA GLOBAL <span>Guía de convivencia y compromisos.</span>
+                    BOOKLET FAMILIA GLOBAL <span>Guía de convivencia y compromisos.</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1768148759" class="sub-button" target="_blank">
-                    _MATERIAL DE PUBLICACIÓN <span>Recursos de marketing para atracción de familias.</span>
+                    MATERIAL DE PUBLICACIÓN <span>Recursos de marketing para atracción de familias.</span>
                 </a>
             </div>
         </div>
@@ -224,13 +230,13 @@
             <p class="desc">Recursos transversales: Normativas, calendarios y prospección de alianzas.</p>
             <div id="menu-otros" class="submenu-wrapper">
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=984632049" class="sub-button" target="_blank">
-                    _NORMAS DE INTERCAMBIO <span>Políticas XPP y estándares (Exchange Standards).</span>
+                    NORMAS DE INTERCAMBIO <span>Políticas XPP y estándares (Exchange Standards).</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1dA-VawdfPJUU0y8AWjCvn9hUyHiQbTi6C-aMEh68n0E/edit" class="sub-button" target="_blank">
-                    _CALENDARIO PUBLICACIONES <span>Planificación de redes sociales del área.</span>
+                    CALENDARIO PUBLICACIONES <span>Planificación de redes sociales del área.</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/13ghfuIjhQMBUbYoS63TY9o_ydCko0xe2GkuOMhBiorA/edit" class="sub-button" target="_blank">
-                    _PROSPECCIÓN EMPRESAS <span>Gráficos y base de datos de partners.</span>
+                    PROSPECCIÓN EMPRESAS <span>Gráficos y base de datos de partners.</span>
                 </a>
             </div>
         </div>
@@ -240,19 +246,19 @@
             <p class="desc">Creatividad y cultura: Ideas de coordinadores, gastronomía y rutas turísticas.</p>
             <div id="menu-att" class="submenu-wrapper">
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=984632049" class="sub-button" target="_blank">
-                    _IDEAS COORDI (MUSHU) <span>Propuestas creativas para la experiencia.</span>
+                    IDEAS COORDI (MUSHU) <span>Propuestas creativas para la experiencia.</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1566107400" class="sub-button" target="_blank">
-                    _LUGARES A VISITAR <span>Checklist de sitios icónicos.</span>
+                    LUGARES A VISITAR <span>Checklist de sitios icónicos.</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1797585253" class="sub-button" target="_blank">
-                    _COMIDAS TÍPICAS <span>Guía gastronómica para el voluntario.</span>
+                    COMIDAS TÍPICAS <span>Guía gastronómica para el voluntario.</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1768148759" class="sub-button" target="_blank">
-                    _RUTAS TURÍSTICAS <span>Itinerarios culturales y de aventura.</span>
+                    RUTAS TURÍSTICAS <span>Itinerarios culturales y de aventura.</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1050707538" class="sub-button" target="_blank">
-                    _IDEAS COORDI (S.A.S.) <span>Estrategias de Suries at Sunset.</span>
+                    IDEAS COORDI (S.A.S.) <span>Estrategias de Suries at Sunset.</span>
                 </a>
             </div>
         </div>
@@ -282,15 +288,14 @@
     }
 
     // Buscador Funcional con visualización de resultados
-    const dataMock = [
-        { n: "Lara Keroline", p: "Brasil", id: "5608844", pr: "HEARTBEAT" },
-        { n: "Frida Mendez", p: "Mexico", id: "5647895", pr: "GREAN LEADERS" },
-        { n: "Mayara Cristine", p: "Brasil", id: "5608102", pr: "EQUIFY" }
+   const dataTNs = [
+        { name: "Lara Keroline", country: "Brasil", id: "5608844", project: "HEARTBEAT", status: "Completed" },
+        { name: "Frida Mendez", country: "Mexico", id: "5647895", project: "GREAN LEADERS", status: "Completed" },
+        { name: "Mayara Cristine", country: "Brasil", id: "5608102", project: "EQUIFY", status: "Approved" }
     ];
 
-    const searchInput = document.getElementById('btnSearch');
-    const resultsBox = document.getElementById('search-results');
-
+    const searchInput = document.getElementById('mainSearch');
+    const resBox = document.getElementById('results-box');
     searchInput.addEventListener('input', (e) => {
         const val = e.target.value.toLowerCase();
         if(!val) { resultsBox.style.display = 'none'; return; }

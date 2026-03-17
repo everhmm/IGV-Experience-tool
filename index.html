@@ -1,360 +1,396 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOOL XPERIENCE | Dashboard Profesional</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        :root {
-            --bg-body: #E8EDF2;
-            --bg-gradient: linear-gradient(135deg, #E8EDF2 0%, #DEE4EA 100%);
-            --card-bg: #DDE3E9;
-            --glass-white: rgba(255, 255, 255, 0.7);
-            --neon-orange: #FF7800;
-            --tech-blue: #3B82F6;
-            --text-main: #111827;
-            --text-gray: #4B5563;
-            --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            --neumorph: 10px 10px 20px #bebebe, -10px -10px 20px #ffffff;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOOL XPERIENCE | Dashboard Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-body: #E8EDF2;
+            --bg-gradient: linear-gradient(135deg, #E8EDF2 0%, #DEE4EA 100%);
+            --card-bg: #DDE3E9;
+            --glass-white: rgba(255, 255, 255, 0.7);
+            --neon-orange: #FF7800;
+            --tech-blue: #3B82F6;
+            --text-main: #111827;
+            --text-gray: #4B5563;
+            --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            --neumorph: 10px 10px 20px #bebebe, -10px -10px 20px #ffffff;
+        }
 
-        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        body {
-            margin: 0;
-            background: var(--bg-gradient);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--text-main);
-            min-height: 100vh;
-        }
+        body {
+            margin: 0;
+            background: var(--bg-gradient);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            min-height: 100vh;
+        }
 
-        /* --- CONTENEDOR TIPO TARJETA GIGANTE --- */
-        .main-card {
-            width: 92%;
-            max-width: 1280px;
-            margin: 40px auto;
-            background: var(--card-bg);
-            border-radius: 32px;
-            box-shadow: 0px 25px 60px rgba(0,0,0,0.08);
-            padding: 60px;
-            position: relative;
-        }
+        /* --- CONTENEDOR TIPO TARJETA GIGANTE --- */
+        .main-card {
+            width: 92%;
+            max-width: 1280px;
+            margin: 40px auto;
+            background: var(--card-bg);
+            border-radius: 32px;
+            box-shadow: 0px 25px 60px rgba(0,0,0,0.08);
+            padding: 60px;
+            position: relative;
+        }
 
-        /* --- HEADER --- */
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 50px;
-        }
-        .logo { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-        .logo-circle { width: 24px; height: 24px; border: 2px solid var(--text-main); border-radius: 50%; }
+        /* --- HEADER --- */
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+        .logo { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .logo-circle { width: 24px; height: 24px; border: 2px solid var(--text-main); border-radius: 50%; }
 
-        /* --- TÍTULOS --- */
-        .hero-section { text-align: center; margin-bottom: 60px; }
-        .hero-section h1 { font-size: 48px; font-weight: 800; margin: 0; color: var(--text-main); letter-spacing: -1.5px; }
-        .hero-section p { font-size: 16px; color: var(--text-gray); max-width: 600px; margin: 15px auto; }
+        /* --- TÍTULOS --- */
+        .hero-section { text-align: center; margin-bottom: 60px; }
+        .hero-section h1 { font-size: 48px; font-weight: 800; margin: 0; color: var(--text-main); letter-spacing: -1.5px; }
+        .hero-section p { font-size: 16px; color: var(--text-gray); max-width: 600px; margin: 15px auto; }
 
-        /* --- BUSCADOR --- */
-       .search-wrapper { position: relative; margin-bottom: 30px; display: flex; justify-content: flex-end; }
-        .search-bar {
-            width: 300px; padding: 12px 20px; border-radius: 20px; border: none;
-            background: var(--glass-white); box-shadow: var(--neumorph-light);
-            outline: none; font-size: 14px;
-        #search-results {
-            position: absolute; top: 55px; right: 0; width: 350px; background: white;
-            border-radius: 20px; box-shadow: var(--shadow-glass); z-index: 1000; display: none; padding: 15px;
-        }
+        /* --- BUSCADOR --- */
+       .search-wrapper { position: relative; margin-bottom: 30px; display: flex; justify-content: flex-end; }
+   .search-bar {
+    width: 300px;
+    padding: 12px 20px;
+    border-radius: 20px;
+    border: none;
+    background: var(--glass-white);
+    box-shadow: var(--neumorph);
+    outline: none;
+    font-size: 14px;
+}
 
-        /* --- ESTADÍSTICAS --- */
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 60px; }
-        .stat-item {
-            background: var(--glass-white); padding: 25px; border-radius: 24px; text-align: center;
-            box-shadow: var(--neumorph); border: 1px solid rgba(255,255,255,0.3);
-        }
-        .stat-item h3 { font-size: 32px; margin: 0; color: var(--neon-orange); }
-        .stat-item span { font-size: 12px; font-weight: 700; color: var(--text-gray); text-transform: uppercase; }
+#search-results {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    width: 350px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow-glass);
+    z-index: 1000;
+    display: none;
+    padding: 15px;
+}
 
-        /* --- BOTONES PRINCIPALES --- */
-        .grid-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        
-        .main-button {
-            background: var(--glass-white); padding: 35px; border-radius: 28px;
-            box-shadow: var(--neumorph); cursor: pointer; border: 1px solid rgba(255,255,255,0.2);
-            position: relative; overflow: hidden;
-        }
-        .main-button:hover { transform: translateY(-8px); border-color: var(--neon-orange); }
-        .main-button h2 { font-size: 26px; margin: 0; color: var(--text-main); }
-        .main-button .desc { font-size: 13px; color: var(--text-gray); margin: 10px 0; line-height: 1.5; }
+        /* --- ESTADÍSTICAS --- */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 60px; }
+        .stat-item {
+            background: var(--glass-white); padding: 25px; border-radius: 24px; text-align: center;
+            box-shadow: var(--neumorph); border: 1px solid rgba(255,255,255,0.3);
+        }
+        .stat-item h3 { font-size: 32px; margin: 0; color: var(--neon-orange); }
+        .stat-item span { font-size: 12px; font-weight: 700; color: var(--text-gray); text-transform: uppercase; }
 
-        /* --- SUBMENÚS (Slide Down) --- */
-        .submenu-wrapper {
-            display: none; flex-direction: column; gap: 12px; margin-top: 25px;
-            padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);
-            animation: slideDown 0.5s ease forwards;
-        }
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* --- BOTONES PRINCIPALES --- */
+        .grid-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        
+        .main-button {
+            background: var(--glass-white); padding: 35px; border-radius: 28px;
+            box-shadow: var(--neumorph); cursor: pointer; border: 1px solid rgba(255,255,255,0.2);
+            position: relative; overflow: hidden;
+        }
+        .main-button:hover { transform: translateY(-8px); border-color: var(--neon-orange); }
+        .main-button h2 { font-size: 26px; margin: 0; color: var(--text-main); }
+        .main-button .desc { font-size: 13px; color: var(--text-gray); margin: 10px 0; line-height: 1.5; }
 
-        .sub-button {
-            background: white; padding: 15px; border-radius: 12px; text-decoration: none;
-            color: var(--text-main); font-weight: 600; font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: block;
-        }
-        .sub-button:hover { background: var(--neon-orange); color: white; transform: scale(1.02); }
-        .sub-button span { display: block; font-size: 11px; font-weight: 400; opacity: 0.9; margin-top: 4px; }
+        /* --- SUBMENÚS (Slide Down) --- */
+        .submenu-wrapper {
+            display: none; flex-direction: column; gap: 12px; margin-top: 25px;
+            padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);
+            animation: slideDown 0.5s ease forwards;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        /* --- GRÁFICOS --- */
-        .charts-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
-        .chart-card { background: white; padding: 25px; border-radius: 28px; box-shadow: var(--neumorph); height: 350px; }
+        .sub-button {
+            background: white; padding: 15px; border-radius: 12px; text-decoration: none;
+            color: var(--text-main); font-weight: 600; font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: block;
+        }
+        .sub-button:hover { background: var(--neon-orange); color: white; transform: scale(1.02); }
+        .sub-button span { display: block; font-size: 11px; font-weight: 400; opacity: 0.9; margin-top: 4px; }
 
-        /* Estilo Responsive */
-        @media (max-width: 900px) {
-            .stats-grid, .charts-container { grid-template-columns: 1fr 1fr; }
-        }
-    </style>
+        /* --- GRÁFICOS --- */
+        .charts-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+        .chart-card { background: white; padding: 25px; border-radius: 28px; box-shadow: var(--neumorph); height: 350px; }
+
+        /* Estilo Responsive */
+        @media (max-width: 900px) {
+            .stats-grid, .charts-container { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
 </head>
 <body>
 
 <div class="main-card">
-    <div class="header-top">
-        <div class="logo"><div class="logo-circle"></div> DAILY INSIDER</div>
-        <div class="search-container">
-            <input type="text" id="btnSearch" class="search-box" placeholder="Buscador: Nombre, País, ID, Proyecto...">
-            <div id="search-results"></div>
-        </div>
-    </div>
+    <div class="header-top">
+        <div class="logo"><div class="logo-circle"></div> DAILY INSIDER</div>
+        <div class="search-container">
+         <input type="text" id="mainSearch" class="search-bar" placeholder="Buscador: Nombre, País, ID, Proyecto...">
+<div id="search-results"></div>
+        </div>
+    </div>
 
-    <div class="hero-section">
-        <h1>TOOL XPERIENCE</h1>
-        <p>Guía de Procesos, Ideas, Carpetas y Gestión de Experience. Centralización de auditorías, seguimiento de TNs y recursos para el comité.</p>
-    </div>
+    <div class="hero-section">
+        <h1>TOOL XPERIENCE</h1>
+        <p>Guía de Procesos, Ideas, Carpetas y Gestión de Experience. Centralización de auditorías, seguimiento de TNs y recursos para el comité.</p>
+    </div>
 
-    <div class="stats-grid">
-        <div class="stat-item"><h3>19</h3><span>Total TNs</span></div>
-        <div class="stat-item"><h3>2</h3><span>Completed</span></div>
-        <div class="stat-item"><h3>8</h3><span>Realized</span></div>
-        <div class="stat-item"><h3>9</h3><span>Approved</span></div>
-    </div>
+    <div class="stats-grid">
+        <div class="stat-item"><h3>19</h3><span>Total TNs</span></div>
+        <div class="stat-item"><h3>2</h3><span>Completed</span></div>
+        <div class="stat-item"><h3>8</h3><span>Realized</span></div>
+        <div class="stat-item"><h3>9</h3><span>Approved</span></div>
+    </div>
 
-    <div class="grid-buttons">
-        
-        <div class="main-button" onclick="toggleMenu('menu-ecb')">
-            <h2>E.C.B.</h2>
-            <p class="desc">Experience Committee Board: Gestión de procesos, auditoría y control de la experiencia del programa.</p>
-            <div id="menu-ecb" class="submenu-wrapper">
-                <a href="https://drive.google.com/file/d/1DB2SgFyDNFDP_74QIntr9bjaK6oXhJMk/view" class="sub-button" target="_blank">
-                    Booklet E.C.B. <span>Guía general del área Experience.</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=0" class="sub-button" target="_blank">
-                    Procesos de Auditoría <span>RE, FI, CO y cuadros de datos dinámicos.</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=82050771" class="sub-button" target="_blank">
-                    Control de TNs y Auditorías <span>Seguimiento de metas y estatus por EP/OP.</span>
-                </a>
-                <a href="https://drive.google.com/drive/folders/19RPTxDFauXHWjBm_D4t6CebWZbu72V7x" class="sub-button" target="_blank">
-                    Documentos de TNs <span>Archivos base del programa y plantillas.</span>
-                </a>
-            </div>
-        </div>
+    <div class="grid-buttons">
+        
+        <div class="main-button" onclick="toggleMenu('menu-ecb')">
+            <h2>E.C.B.</h2>
+            <p class="desc">Experience Committee Board: Gestión de procesos, auditoría y control de la experiencia del programa.</p>
+            <div id="menu-ecb" class="submenu-wrapper">
+                <a href="https://drive.google.com/file/d/1DB2SgFyDNFDP_74QIntr9bjaK6oXhJMk/view" class="sub-button" target="_blank">
+                    Booklet E.C.B. <span>Guía general del área Experience.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=0" class="sub-button" target="_blank">
+                    Procesos de Auditoría <span>RE, FI, CO y cuadros de datos dinámicos.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=82050771" class="sub-button" target="_blank">
+                    Control de TNs y Auditorías <span>Seguimiento de metas y estatus por EP/OP.</span>
+                </a>
+                <a href="https://drive.google.com/drive/folders/19RPTxDFauXHWjBm_D4t6CebWZbu72V7x" class="sub-button" target="_blank">
+                    Documentos de TNs <span>Archivos base del programa y plantillas.</span>
+                </a>
+            </div>
+        </div>
 
-        <div class="main-button" onclick="toggleMenu('menu-tns')">
-            <h2>TNs</h2>
-            <p class="desc">Módulo de gestión directa del Trainee: Fechas, logística, certificados y espacios LEAD.</p>
-            <div id="menu-tns" class="submenu-wrapper">
-                <a href="https://docs.google.com/spreadsheets/d/1lm-dnfHMbVA2lGxxgVKqni5nRV93jw8cg62iyd3MaW8/edit" class="sub-button" target="_blank">
-                    DATOS DEL TNs <span>Panel de IDs, fechas de llegada/salida y estado.</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1566107400" class="sub-button" target="_blank">
-                    PROPUESTAS DE LUGARES <span>Destinos recomendados para visitas de TNs.</span>
-                </a>
-                <a href="https://drive.google.com/drive/folders/1Jzv54ZdGwVnGH-C7J3EGT7MxHSbnKxOM" class="sub-button" target="_blank">
-                    DOCUMENTOS EN BORRADOR <span>Archivos en proceso de edición.</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1672732825" class="sub-button" target="_blank">
-                    LEAD SPACE <span>Análisis y resumen de sesiones educativas.</span>
-                 </a>
-                <a href="https://drive.google.com/drive/folders/19RPTxDFauXHWjBm_D4t6CebWZbu72V7x?usp=drive_link" class="sub-button" target="_blank">
-                   CARPETA TNs <span>Análisis y resumen de sesiones educativas.</span>
-                </a>
-                <a href="https://www.canva.com/design/DAFqyLAfyxk/pQkUH7JSHjLnf_RvWpIqDg/edit" class="sub-button" target="_blank">
-                    CERTIFICADOS TNs <span>Diseño y entrega de acreditaciones.</span>
-                </a>
-                <a href="https://drive.google.com/drive/folders/1K87UCJSfcOfTMYScv49pbZppya0feQP8" class="sub-button" target="_blank">
-                    SHOWCASING BUDDIES <span>Galería de fotos y evidencias.</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=1768148759#gid=1768148759" class="sub-button" target="_blank">
-                    FAMILIAS GLOBALES <span>Galería de fotos y evidencias.</span>
-                </a>
-            </div>
-        </div>
+        <div class="main-button" onclick="toggleMenu('menu-tns')">
+            <h2>TNs</h2>
+            <p class="desc">Módulo de gestión directa del Trainee: Fechas, logística, certificados y espacios LEAD.</p>
+            <div id="menu-tns" class="submenu-wrapper">
+                <a href="https://docs.google.com/spreadsheets/d/1lm-dnfHMbVA2lGxxgVKqni5nRV93jw8cg62iyd3MaW8/edit" class="sub-button" target="_blank">
+                    DATOS DEL TNs <span>Panel de IDs, fechas de llegada/salida y estado.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1566107400" class="sub-button" target="_blank">
+                    PROPUESTAS DE LUGARES <span>Destinos recomendados para visitas de TNs.</span>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1Jzv54ZdGwVnGH-C7J3EGT7MxHSbnKxOM" class="sub-button" target="_blank">
+                    DOCUMENTOS EN BORRADOR <span>Archivos en proceso de edición.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1672732825" class="sub-button" target="_blank">
+                    LEAD SPACE <span>Análisis y resumen de sesiones educativas.</span>
+                 </a>
+                <a href="https://drive.google.com/drive/folders/19RPTxDFauXHWjBm_D4t6CebWZbu72V7x?usp=drive_link" class="sub-button" target="_blank">
+                   CARPETA TNs <span>Análisis y resumen de sesiones educativas.</span>
+                </a>
+                <a href="https://www.canva.com/design/DAFqyLAfyxk/pQkUH7JSHjLnf_RvWpIqDg/edit" class="sub-button" target="_blank">
+                    CERTIFICADOS TNs <span>Diseño y entrega de acreditaciones.</span>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1K87UCJSfcOfTMYScv49pbZppya0feQP8" class="sub-button" target="_blank">
+                    SHOWCASING BUDDIES <span>Galería de fotos y evidencias.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=1768148759#gid=1768148759" class="sub-button" target="_blank">
+                    FAMILIAS GLOBALES <span>Galería de fotos y evidencias.</span>
+                </a>
+            </div>
+        </div>
 
-        <div class="main-button" onclick="toggleMenu('menu-buddies')">
-            <h2>Buddies</h2>
-            <p class="desc">Gestión del programa de acompañamiento: Evaluaciones, reportes y reconocimientos.</p>
-            <div id="menu-buddies" class="submenu-wrapper">
-                <a href="https://docs.google.com/document/d/1LyehSH6YrOIA3VfI9xUQcy-5qYLo0LOFTB8hGutdnsA/edit" class="sub-button" target="_blank">
-                    EVALUACIÓN ELECCIÓN <span>Criterios de selección para nuevos buddies.</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=2098444727" class="sub-button" target="_blank">
-                    REPORTES EXPERIENCIAS <span>Reportes detallados (Golden Sunrise).</span>
-                </a>
-                <a href="https://docs.google.com/forms/d/12LuXpC3-ASuBRVvLTLa7QrbJLLkZqLblucQ_dSj4-9Y/viewform" class="sub-button" target="_blank">
-                    FORMULARIO APLICACIÓN <span>Link directo para postulación de voluntarios.</span>
-                </a>
-                <a href="https://www.canva.com/design/DAGkQsz7a7A/bNmeSp4PfSgkKrDdP6l2CA/edit" class="sub-button" target="_blank">
-                    AGRADECIMIENTOS <span>Material visual de reconocimiento.</span>
-                </a>
-            </div>
-        </div>
+        <div class="main-button" onclick="toggleMenu('menu-buddies')">
+            <h2>Buddies</h2>
+            <p class="desc">Gestión del programa de acompañamiento: Evaluaciones, reportes y reconocimientos.</p>
+            <div id="menu-buddies" class="submenu-wrapper">
+                <a href="https://docs.google.com/document/d/1LyehSH6YrOIA3VfI9xUQcy-5qYLo0LOFTB8hGutdnsA/edit" class="sub-button" target="_blank">
+                    EVALUACIÓN ELECCIÓN <span>Criterios de selección para nuevos buddies.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=2098444727" class="sub-button" target="_blank">
+                    REPORTES EXPERIENCIAS <span>Reportes detallados (Golden Sunrise).</span>
+                </a>
+                <a href="https://docs.google.com/forms/d/12LuXpC3-ASuBRVvLTLa7QrbJLLkZqLblucQ_dSj4-9Y/viewform" class="sub-button" target="_blank">
+                    FORMULARIO APLICACIÓN <span>Link directo para postulación de voluntarios.</span>
+                </a>
+                <a href="https://www.canva.com/design/DAGkQsz7a7A/bNmeSp4PfSgkKrDdP6l2CA/edit" class="sub-button" target="_blank">
+                    AGRADECIMIENTOS <span>Material visual de reconocimiento.</span>
+                </a>
+            </div>
+        </div>
 
-        <div class="main-button" onclick="toggleMenu('menu-fam')">
-            <h2>Familia Global</h2>
-            <p class="desc">Gestión de familias anfitrionas: Booklets informativos y materiales de difusión.</p>
-            <div id="menu-fam" class="submenu-wrapper">
-                <a href="https://www.canva.com/design/DAGmfmofgSs/nuGUyRLIbEkxNl8U7nSHTg/edit" class="sub-button" target="_blank">
-                    BOOKLET FAMILIA GLOBAL <span>Guía de convivencia y compromisos.</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1768148759" class="sub-button" target="_blank">
-                    MATERIAL DE PUBLICACIÓN <span>Recursos de marketing para atracción de familias.</span>
-                </a>
-            </div>
-        </div>
+        <div class="main-button" onclick="toggleMenu('menu-fam')">
+            <h2>Familia Global</h2>
+            <p class="desc">Gestión de familias anfitrionas: Booklets informativos y materiales de difusión.</p>
+            <div id="menu-fam" class="submenu-wrapper">
+                <a href="https://www.canva.com/design/DAGmfmofgSs/nuGUyRLIbEkxNl8U7nSHTg/edit" class="sub-button" target="_blank">
+                    BOOKLET FAMILIA GLOBAL <span>Guía de convivencia y compromisos.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1768148759" class="sub-button" target="_blank">
+                    MATERIAL DE PUBLICACIÓN <span>Recursos de marketing para atracción de familias.</span>
+                </a>
+            </div>
+        </div>
 
-        <div class="main-button" onclick="toggleMenu('menu-otros')">
-            <h2>Otros</h2>
-            <p class="desc">Recursos transversales: Normativas, calendarios y prospección de alianzas.</p>
-            <div id="menu-otros" class="submenu-wrapper">
-                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=984632049" class="sub-button" target="_blank">
-                    NORMAS DE INTERCAMBIO <span>Políticas XPP y estándares (Exchange Standards).</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1dA-VawdfPJUU0y8AWjCvn9hUyHiQbTi6C-aMEh68n0E/edit" class="sub-button" target="_blank">
-                    CALENDARIO PUBLICACIONES <span>Planificación de redes sociales del área.</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/13ghfuIjhQMBUbYoS63TY9o_ydCko0xe2GkuOMhBiorA/edit" class="sub-button" target="_blank">
-                    PROSPECCIÓN EMPRESAS <span>Gráficos y base de datos de partners.</span>
-                </a>
-            </div>
-        </div>
+        <div class="main-button" onclick="toggleMenu('menu-otros')">
+            <h2>Otros</h2>
+            <p class="desc">Recursos transversales: Normativas, calendarios y prospección de alianzas.</p>
+            <div id="menu-otros" class="submenu-wrapper">
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=984632049" class="sub-button" target="_blank">
+                    NORMAS DE INTERCAMBIO <span>Políticas XPP y estándares (Exchange Standards).</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1dA-VawdfPJUU0y8AWjCvn9hUyHiQbTi6C-aMEh68n0E/edit" class="sub-button" target="_blank">
+                    CALENDARIO PUBLICACIONES <span>Planificación de redes sociales del área.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/13ghfuIjhQMBUbYoS63TY9o_ydCko0xe2GkuOMhBiorA/edit" class="sub-button" target="_blank">
+                    PROSPECCIÓN EMPRESAS <span>Gráficos y base de datos de partners.</span>
+                </a>
+            </div>
+        </div>
 
-        <div class="main-button" onclick="toggleMenu('menu-att')">
-            <h2>Attraction</h2>
-            <p class="desc">Creatividad y cultura: Ideas de coordinadores, gastronomía y rutas turísticas.</p>
-            <div id="menu-att" class="submenu-wrapper">
-                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=984632049" class="sub-button" target="_blank">
-                    IDEAS COORDI (MUSHU) <span>Propuestas creativas para la experiencia.</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1566107400" class="sub-button" target="_blank">
-                    LUGARES A VISITAR <span>Checklist de sitios icónicos.</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1797585253" class="sub-button" target="_blank">
-                    COMIDAS TÍPICAS <span>Guía gastronómica para el voluntario.</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1768148759" class="sub-button" target="_blank">
-                    RUTAS TURÍSTICAS <span>Itinerarios culturales y de aventura.</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1050707538" class="sub-button" target="_blank">
-                    IDEAS COORDI (S.A.S.) <span>Estrategias de Suries at Sunset.</span>
-                </a>
-            </div>
-        </div>
+        <div class="main-button" onclick="toggleMenu('menu-att')">
+            <h2>Attraction</h2>
+            <p class="desc">Creatividad y cultura: Ideas de coordinadores, gastronomía y rutas turísticas.</p>
+            <div id="menu-att" class="submenu-wrapper">
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=984632049" class="sub-button" target="_blank">
+                    IDEAS COORDI (MUSHU) <span>Propuestas creativas para la experiencia.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1566107400" class="sub-button" target="_blank">
+                    LUGARES A VISITAR <span>Checklist de sitios icónicos.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1797585253" class="sub-button" target="_blank">
+                    COMIDAS TÍPICAS <span>Guía gastronómica para el voluntario.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1768148759" class="sub-button" target="_blank">
+                    RUTAS TURÍSTICAS <span>Itinerarios culturales y de aventura.</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit#gid=1050707538" class="sub-button" target="_blank">
+                    IDEAS COORDI (S.A.S.) <span>Estrategias de Suries at Sunset.</span>
+                </a>
+            </div>
+        </div>
 
-    </div>
+    </div>
 
-    <div class="charts-container">
-        <div class="chart-card"><canvas id="chartCountry"></canvas></div>
-        <div class="chart-card"><canvas id="chartStatus"></canvas></div>
-        <div class="chart-card"><canvas id="chartOpp"></canvas></div>
-    </div>
+    <div class="charts-container">
+        <div class="chart-card"><canvas id="chartCountry"></canvas></div>
+        <div class="chart-card"><canvas id="chartStatus"></canvas></div>
+        <div class="chart-card"><canvas id="chartOpp"></canvas></div>
+    </div>
 </div>
 
 <script>
-    // Función para abrir/cerrar submenús
-    function toggleMenu(id) {
-        const target = document.getElementById(id);
-        const isOpen = target.style.display === 'flex';
-        
-        // Cerrar todos
-        document.querySelectorAll('.submenu-wrapper').forEach(m => m.style.display = 'none');
-        
-        // Abrir el seleccionado
-        if (!isOpen) {
-            target.style.display = 'flex';
-        }
+    // Función para abrir/cerrar submenús
+    function toggleMenu(id) {
+        const target = document.getElementById(id);
+        const isOpen = target.style.display === 'flex';
+        
+        // Cerrar todos
+        document.querySelectorAll('.submenu-wrapper').forEach(m => m.style.display = 'none');
+        
+        // Abrir el seleccionado
+        if (!isOpen) {
+            target.style.display = 'flex';
+        }
+    }
+
+    // Buscador Funcional con visualización de resultados
+   const dataTNs = [
+        { name: "Lara Keroline", country: "Brasil", id: "5608844", project: "HEARTBEAT", status: "Completed" },
+        { name: "Frida Mendez", country: "Mexico", id: "5647895", project: "GREAN LEADERS", status: "Completed" },
+        { name: "Mayara Cristine", country: "Brasil", id: "5608102", project: "EQUIFY", status: "Approved" }
+    ];
+
+const searchInput = document.getElementById('mainSearch');
+const resultsBox = document.getElementById('search-results');
+
+searchInput.addEventListener('input', (e) => {
+
+    const val = e.target.value.toLowerCase();
+
+    if (!val) {
+        resultsBox.style.display = 'none';
+        return;
     }
 
-    // Buscador Funcional con visualización de resultados
-   const dataTNs = [
-        { name: "Lara Keroline", country: "Brasil", id: "5608844", project: "HEARTBEAT", status: "Completed" },
-        { name: "Frida Mendez", country: "Mexico", id: "5647895", project: "GREAN LEADERS", status: "Completed" },
-        { name: "Mayara Cristine", country: "Brasil", id: "5608102", project: "EQUIFY", status: "Approved" }
-    ];
+    const filter = dataTNs.filter(d =>
+        d.name.toLowerCase().includes(val) ||
+        d.country.toLowerCase().includes(val) ||
+        d.id.includes(val) ||
+        d.project.toLowerCase().includes(val)
+    );
 
-    const searchInput = document.getElementById('mainSearch');
-    const resBox = document.getElementById('results-box');
-    searchInput.addEventListener('input', (e) => {
-        const val = e.target.value.toLowerCase();
-        if(!val) { resultsBox.style.display = 'none'; return; }
+    if (filter.length > 0) {
 
-        const filter = dataMock.filter(d => d.n.toLowerCase().includes(val) || d.id.includes(val) || d.p.toLowerCase().includes(val));
-        
-        if(filter.length > 0) {
-            resultsBox.style.display = 'block';
-            resultsBox.innerHTML = filter.map(d => `
-                <div style="padding:10px; border-bottom:1px solid #eee; font-size:12px;">
-                    <b>${d.n}</b> - ${d.p}<br>
-                    <small>ID: ${d.id} | Proyecto: ${d.pr}</small>
-                </div>
-            `).join('');
-        } else {
-            resultsBox.innerHTML = '<div style="padding:10px; font-size:12px; color:gray;">Sin resultados</div>';
-        }
-    });
+        resultsBox.style.display = 'block';
 
-    // Configuración de Gráficos (Data real del Excel analizado)
-    const ctx1 = document.getElementById('chartCountry').getContext('2d');
-    new Chart(ctx1, {
-        type: 'pie',
-        data: {
-            labels: ['Brasil', 'México', 'EEUU', 'Colombia'],
-            datasets: [{
-                data: [14, 2, 1, 1],
-                backgroundColor: ['#3B82F6', '#FF7800', '#10B981', '#6366F1']
-            }]
-        },
-        options: { plugins: { title: { display: true, text: 'TNs por País de Origen' } } }
-    });
+        resultsBox.innerHTML = filter.map(d => `
+            <div style="padding:10px;border-bottom:1px solid #eee;font-size:12px;">
+                <b>${d.name}</b> - ${d.country}<br>
+                <small>ID: ${d.id} | Proyecto: ${d.project} | Status: ${d.status}</small>
+            </div>
+        `).join('');
 
-    const ctx2 = document.getElementById('chartStatus').getContext('2d');
-    new Chart(ctx2, {
-        type: 'doughnut',
-        data: {
-            labels: ['Approved', 'Realized', 'Completed'],
-            datasets: [{
-                data: [9, 8, 2],
-                backgroundColor: ['#FF7800', '#3B82F6', '#8B5CF6']
-            }]
-        },
-        options: { plugins: { title: { display: true, text: 'Distribución de Estatus' } } }
-    });
+    } else {
 
-    const ctx3 = document.getElementById('chartOpp').getContext('2d');
-    new Chart(ctx3, {
-        type: 'bar',
-        data: {
-            labels: ['Hogar San Ramón', 'Albergue', 'Otros'],
-            datasets: [{
-                label: 'Cantidad',
-                data: [17, 1, 1],
-                backgroundColor: '#3B82F6'
-            }]
-        },
-        options: { plugins: { title: { display: true, text: 'Lugar de Oportunidad' } } }
-    });
+        resultsBox.style.display = 'block';
+        resultsBox.innerHTML = `
+        <div style="padding:10px;font-size:12px;color:gray;">
+        Sin resultados
+        </div>`;
+
+    }
+
+});
+
+    // Configuración de Gráficos (Data real del Excel analizado)
+    const ctx1 = document.getElementById('chartCountry').getContext('2d');
+    new Chart(ctx1, {
+        type: 'pie',
+        data: {
+            labels: ['Brasil', 'México', 'EEUU', 'Colombia'],
+            datasets: [{
+                data: [14, 2, 1, 1],
+                backgroundColor: ['#3B82F6', '#FF7800', '#10B981', '#6366F1']
+            }]
+        },
+        options: { plugins: { title: { display: true, text: 'TNs por País de Origen' } } }
+    });
+
+    const ctx2 = document.getElementById('chartStatus').getContext('2d');
+    new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Approved', 'Realized', 'Completed'],
+            datasets: [{
+                data: [9, 8, 2],
+                backgroundColor: ['#FF7800', '#3B82F6', '#8B5CF6']
+            }]
+        },
+        options: { plugins: { title: { display: true, text: 'Distribución de Estatus' } } }
+    });
+
+    const ctx3 = document.getElementById('chartOpp').getContext('2d');
+    new Chart(ctx3, {
+        type: 'bar',
+        data: {
+            labels: ['Hogar San Ramón', 'Albergue', 'Otros'],
+            datasets: [{
+                label: 'Cantidad',
+                data: [17, 1, 1],
+                backgroundColor: '#3B82F6'
+            }]
+        },
+        options: { plugins: { title: { display: true, text: 'Lugar de Oportunidad' } } }
+    });
 </script>
 
 </body>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
 <meta charset="UTF-8">
@@ -15,164 +16,230 @@
 <style>
 
 body{
-margin:0;
 font-family:'Inter',sans-serif;
-background:linear-gradient(120deg,#e8edf2,#dee4ea);
-color:#2c3440;
-}
-
-.container{
-display:flex;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-width:300px;
-height:100vh;
-padding:25px;
-background:rgba(255,255,255,0.4);
-backdrop-filter:blur(20px);
-border-right:1px solid rgba(255,255,255,0.4);
-box-shadow:0 8px 30px rgba(0,0,0,0.1);
-overflow:auto;
-}
-
-.title{
-font-size:22px;
-font-weight:700;
-margin-bottom:10px;
-}
-
-.desc{
-font-size:12px;
-color:#555;
-margin-bottom:25px;
-}
-
-.menu-item{
-margin-bottom:12px;
-}
-
-.menu-btn{
-width:100%;
-padding:14px;
-border:none;
-border-radius:16px;
-cursor:pointer;
-background:rgba(255,255,255,0.6);
-box-shadow:
-6px 6px 12px rgba(0,0,0,0.05),
--6px -6px 12px rgba(255,255,255,0.8);
-transition:0.3s;
-}
-
-.menu-btn:hover{
-transform:translateY(-2px);
-box-shadow:0 12px 20px rgba(0,0,0,0.1);
-}
-
-.submenu{
-display:none;
-margin-top:8px;
-padding:10px;
-background:white;
-border-radius:12px;
-box-shadow:0 10px 20px rgba(0,0,0,0.08);
-}
-
-.submenu a{
-display:block;
-padding:8px;
-font-size:13px;
-color:#333;
-text-decoration:none;
-}
-
-.submenu a:hover{
-color:#ff7a00;
-}
-
-/* MAIN */
-
-.main{
-flex:1;
+background:linear-gradient(#E8EDF2,#DEE4EA);
+margin:0;
 padding:40px;
 }
 
-.header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:30px;
+/* CONTENEDOR PRINCIPAL */
+
+.container{
+
+max-width:1250px;
+margin:auto;
+background:#DDE3E9;
+border-radius:30px;
+padding:60px;
+box-shadow:0px 25px 60px rgba(0,0,0,0.08);
+
 }
 
-.search{
-padding:12px;
-width:250px;
-border-radius:12px;
+/* TITULO */
+
+.title{
+
+text-align:center;
+font-size:42px;
+font-weight:700;
+color:#111;
+
+}
+
+.subtitle{
+
+text-align:center;
+color:#5b6672;
+margin-bottom:40px;
+
+}
+
+/* BUSCADOR */
+
+.searchBox{
+
+display:flex;
+justify-content:flex-end;
+margin-bottom:30px;
+
+}
+
+.searchBox input{
+
+padding:14px;
+border-radius:15px;
 border:none;
-background:white;
-box-shadow:0 8px 20px rgba(0,0,0,0.08);
+width:300px;
+box-shadow: inset 3px 3px 6px #c9ced4,
+            inset -3px -3px 6px #ffffff;
+
 }
 
-/* STATS */
+/* RESULTADOS BUSQUEDA */
 
-.stats{
-display:flex;
-gap:20px;
+.results{
+
+display:none;
 margin-bottom:30px;
+
+}
+
+/* BOTONES PRINCIPALES */
+
+.menu{
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+margin-bottom:50px;
+
+}
+
+.menu button{
+
+padding:30px;
+border-radius:20px;
+border:none;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+
+background:rgba(255,255,255,0.6);
+backdrop-filter:blur(20px);
+
+box-shadow:
+8px 8px 18px rgba(0,0,0,0.1),
+-8px -8px 18px rgba(255,255,255,0.8);
+
+transition:0.3s;
+
+}
+
+.menu button:hover{
+
+transform:translateY(-4px);
+box-shadow:
+12px 12px 22px rgba(0,0,0,0.15),
+-10px -10px 22px rgba(255,255,255,0.9);
+
+}
+
+/* SECCIONES */
+
+.section{
+
+display:none;
+margin-top:20px;
+
+}
+
+.section h2{
+
+font-size:32px;
+margin-bottom:10px;
+
+}
+
+.section p{
+
+color:#555;
+
+}
+
+/* SUB BOTONES */
+
+.submenu{
+
+margin-top:30px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+
 }
 
 .card{
-flex:1;
-padding:20px;
+
+padding:25px;
 border-radius:20px;
-background:rgba(255,255,255,0.6);
-backdrop-filter:blur(15px);
+
+background:rgba(255,255,255,0.65);
+backdrop-filter:blur(20px);
+
 box-shadow:
-10px 10px 25px rgba(0,0,0,0.08),
--10px -10px 25px rgba(255,255,255,0.8);
+8px 8px 20px rgba(0,0,0,0.1),
+-8px -8px 20px rgba(255,255,255,0.8);
+
 }
 
 .card h3{
-margin:0;
+
+margin-top:0;
+
 }
 
-.chart-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:20px;
-margin-top:30px;
+.card p{
+
+font-size:14px;
+color:#5b6672;
+
 }
 
-.section{
-margin-top:40px;
-}
+.card a{
 
-.section-title{
-font-size:26px;
-font-weight:700;
-}
-
-.section-desc{
-color:#555;
-margin-bottom:20px;
-}
-
-.link-card{
-padding:20px;
-margin-bottom:15px;
-border-radius:18px;
-background:rgba(255,255,255,0.6);
-backdrop-filter:blur(15px);
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
-}
-
-.link-card a{
-color:#ff7a00;
-font-weight:600;
+display:inline-block;
+margin-top:10px;
+padding:10px 18px;
+background:#ff6a00;
+color:white;
 text-decoration:none;
+border-radius:10px;
+
+}
+
+/* ESTADISTICAS */
+
+.stats{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-top:50px;
+
+}
+
+.stat{
+
+padding:20px;
+border-radius:20px;
+
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(20px);
+
+box-shadow:
+6px 6px 15px rgba(0,0,0,0.1),
+-6px -6px 15px rgba(255,255,255,0.8);
+
+text-align:center;
+
+}
+
+/* GRAFICOS */
+
+.charts{
+
+margin-top:40px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+
+}
+
+canvas{
+
+background:white;
+padding:15px;
+border-radius:15px;
+
 }
 
 </style>
@@ -182,219 +249,153 @@ text-decoration:none;
 
 <div class="container">
 
-<!-- SIDEBAR -->
-
-<div class="sidebar">
-
-<div class="title">TOOL XPERIENCE</div>
-
-<div class="desc">
-Guía de Procesos, Ideas, Carpetas y Gestión de Experience.
+<div class="title">
+TOOL XPERIENCE
 </div>
 
-<div class="menu-item">
+<div class="subtitle">
+Guía de Procesos, Ideas, Carpetas y Gestión de Experience
+</div>
 
-<button class="menu-btn" onclick="toggleMenu(this)">
-E.C.B.
-</button>
+<div class="searchBox">
+<input type="text" id="search" placeholder="Buscar TN, País, Proyecto, Estado...">
+</div>
+
+<div id="results" class="results"></div>
+
+<!-- MENU PRINCIPAL -->
+
+<div class="menu">
+
+<button onclick="showSection('ecb')">E.C.B.</button>
+<button onclick="showSection('tns')">TNs</button>
+<button onclick="showSection('buddies')">Buddies</button>
+<button onclick="showSection('familia')">Familia Global</button>
+<button onclick="showSection('otros')">Otros</button>
+<button onclick="showSection('attraction')">Attraction</button>
+
+</div>
+
+<!-- SECCION ECB -->
+
+<div id="ecb" class="section">
+
+<h2>E.C.B.</h2>
+
+<p>
+Experience Committee Board. Gestión de procesos, auditoría y control de la experiencia del programa.
+</p>
 
 <div class="submenu">
 
-<a href="#">Booklet E.C.B.</a>
+<div class="card">
+<h3>Booklet E.C.B.</h3>
+<p>Guía general del área Experience.</p>
+<a href="https://drive.google.com/file/d/1DB2SgFyDNFDP_74QIntr9bjaK6oXhJMk/view" target="_blank">Abrir</a>
+</div>
 
-<a href="#">Procesos de Auditoría</a>
+<div class="card">
+<h3>Procesos de Auditoría</h3>
+<p>Procedimientos de control y evaluación en experience.</p>
+<a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ" target="_blank">Abrir</a>
+</div>
 
-<a href="#">Control de TNs y Auditorías</a>
+<div class="card">
+<h3>Control de TNs</h3>
+<p>Seguimiento y control de cada trainee.</p>
+<a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ" target="_blank">Abrir</a>
+</div>
 
-<a href="https://drive.google.com/drive/folders/19RPTxDFauXHWjBm_D4t6CebWZbu72V7x" target="_blank">
-Documentos de TNs
-</a>
-
+<div class="card">
+<h3>Documentos TNs</h3>
+<p>Repositorio de documentos del programa.</p>
+<a href="https://drive.google.com/drive/folders/19RPTxDFauXHWjBm_D4t6CebWZbu72V7x" target="_blank">Abrir</a>
 </div>
 
 </div>
 
-<div class="menu-item">
+</div>
 
-<button class="menu-btn" onclick="toggleMenu(this)">
-TNs
-</button>
+<!-- SECCION TNs -->
+
+<div id="tns" class="section">
+
+<h2>TNs</h2>
+<p>Gestión de información de trainees.</p>
 
 <div class="submenu">
 
-<a href="#">Datos del TNs</a>
+<div class="card">
+<h3>Datos TNs</h3>
+<p>Base de datos principal de trainees.</p>
+<a href="https://docs.google.com/spreadsheets/d/1lm-dnfHMbVA2lGxxgVKqni5nRV93jw8cg62iyd3MaW8" target="_blank">Abrir</a>
+</div>
 
-<a href="#">Propuestas de Lugares</a>
-
-<a href="#">Lead Space</a>
-
-<a href="#">Certificados</a>
-
+<div class="card">
+<h3>Lugares a visitar</h3>
+<p>Recomendaciones turísticas para trainees.</p>
+<a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ" target="_blank">Abrir</a>
 </div>
 
 </div>
 
-<div class="menu-item">
+</div>
 
-<button class="menu-btn" onclick="toggleMenu(this)">
-Buddies
-</button>
+<!-- SECCION BUDDIES -->
+
+<div id="buddies" class="section">
+
+<h2>Buddies</h2>
+<p>Gestión del sistema de acompañamiento.</p>
 
 <div class="submenu">
 
-<a href="#">Evaluación Elección</a>
-
-<a href="#">Reportes Experiencias</a>
-
-<a href="#">Formulario Aplicación</a>
-
-<a href="https://www.canva.com/design/DAGkQsz7a7A/bNmeSp4PfSgkKrDdP6l2CA/edit?utm_content=DAGkQsz7a7A&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank">
-Agradecimientos a Buddies
-</a>
-
+<div class="card">
+<h3>Evaluación Buddies</h3>
+<p>Proceso de selección y evaluación.</p>
+<a href="https://docs.google.com/document/d/1LyehSH6YrOIA3VfI9xUQcy-5qYLo0LOFTB8hGutdnsA" target="_blank">Abrir</a>
 </div>
 
+<div class="card">
+<h3>Reportes Experiencia</h3>
+<p>Reportes realizados por buddies.</p>
+<a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ" target="_blank">Abrir</a>
 </div>
 
-<div class="menu-item">
-
-<button class="menu-btn" onclick="toggleMenu(this)">
-Familia Global
-</button>
-
-<div class="submenu">
-
-<a href="#">Booklet Familia Global</a>
-
-<a href="#">Material de Publicación</a>
-
+<div class="card">
+<h3>Formulario Buddies</h3>
+<p>Formulario de aplicación.</p>
+<a href="https://docs.google.com/forms/d/12LuXpC3-ASuBRVvLTLa7QrbJLLkZqLblucQ_dSj4-9Y" target="_blank">Abrir</a>
 </div>
 
-</div>
-
-<div class="menu-item">
-
-<button class="menu-btn" onclick="toggleMenu(this)">
-Otros
-</button>
-
-<div class="submenu">
-
-<a href="#">Normas de Intercambio</a>
-
-<a href="#">Calendario Publicaciones</a>
-
-<a href="#">Prospección Empresas</a>
-
-</div>
-
-</div>
-
-<div class="menu-item">
-
-<button class="menu-btn" onclick="toggleMenu(this)">
-Attraction
-</button>
-
-<div class="submenu">
-
-<a href="#">Ideas Coordi Mushu</a>
-
-<a href="#">Lugares a Visitar</a>
-
-<a href="#">Comidas Típicas</a>
-
-<a href="#">Rutas Turísticas</a>
-
-<a href="#">Ideas Coordi SAS</a>
-
+<div class="card">
+<h3>Agradecimientos Buddies</h3>
+<p>Material de agradecimiento.</p>
+<a href="https://www.canva.com/design/DAGkQsz7a7A/bNmeSp4PfSgkKrDdP6l2CA/edit?utm_content=DAGkQsz7a7A&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank">Abrir</a>
 </div>
 
 </div>
 
 </div>
 
-<!-- MAIN -->
-
-<div class="main">
-
-<div class="header">
-
-<h2>Dashboard Experience</h2>
-
-<input class="search" id="search" placeholder="Buscar TN, país o estado">
-
-</div>
-
-<!-- STATS -->
+<!-- ESTADISTICAS -->
 
 <div class="stats">
 
-<div class="card">
-<h3 id="total">0</h3>
-<p>Total TNs</p>
-</div>
-
-<div class="card">
-<h3 id="completed">0</h3>
-<p>Completed</p>
-</div>
-
-<div class="card">
-<h3 id="realized">0</h3>
-<p>Realized</p>
-</div>
-
-<div class="card">
-<h3 id="approved">0</h3>
-<p>Approved</p>
-</div>
+<div class="stat">Total TNs: 0</div>
+<div class="stat">Completed: 0</div>
+<div class="stat">Realized: 0</div>
+<div class="stat">Approved: 0</div>
 
 </div>
 
-<!-- CHARTS -->
+<!-- GRAFICOS -->
 
-<div class="chart-grid">
+<div class="charts">
 
-<div class="card">
 <canvas id="countryChart"></canvas>
-</div>
-
-<div class="card">
 <canvas id="statusChart"></canvas>
-</div>
-
-<div class="card">
-<canvas id="opportunityChart"></canvas>
-</div>
-
-</div>
-
-<!-- SECTION -->
-
-<div class="section">
-
-<div class="section-title">
-Experience Committee Board
-</div>
-
-<div class="section-desc">
-
-Gestión de procesos, auditoría y control de la experiencia del programa.  
-Este módulo centraliza las guías operativas, auditorías internas y el seguimiento estructurado de los procesos de experience.
-
-</div>
-
-<div class="link-card">
-
-📘 Booklet E.C.B.  
-<a href="https://drive.google.com/file/d/1DB2SgFyDNFDP_74QIntr9bjaK6oXhJMk/view" target="_blank">
-Abrir documento
-</a>
-
-</div>
-
-</div>
+<canvas id="placeChart"></canvas>
 
 </div>
 
@@ -402,125 +403,80 @@ Abrir documento
 
 <script>
 
-const CSV_URL="TU_LINK_CSV_AQUI"
+/* Mostrar secciones */
 
-let data=[]
+function showSection(id){
 
-function toggleMenu(btn){
+document.querySelectorAll(".section").forEach(s=>{
 
-let submenu=btn.nextElementSibling
-
-document.querySelectorAll(".submenu").forEach(m=>{
-if(m!==submenu)m.style.display="none"
-})
-
-submenu.style.display=submenu.style.display==="block"?"none":"block"
-
-}
-
-function loadData(){
-
-Papa.parse(CSV_URL,{
-download:true,
-header:true,
-complete:function(results){
-
-data=results.data.filter(r=>r["EP/OP NAME"])
-
-updateStats()
-
-createCharts()
-
-}
+s.style.display="none"
 
 })
 
-}
-
-function updateStats(){
-
-document.getElementById("total").innerText=data.length
-
-document.getElementById("completed").innerText=
-data.filter(x=>x.STATUS==="COMPLETED").length
-
-document.getElementById("realized").innerText=
-data.filter(x=>x.STATUS==="REALIZED").length
-
-document.getElementById("approved").innerText=
-data.filter(x=>x.STATUS==="APPROVED").length
+document.getElementById(id).style.display="block"
 
 }
 
-function count(field){
+/* buscador simple */
 
-let obj={}
+const search = document.getElementById("search")
+const results = document.getElementById("results")
 
-data.forEach(r=>{
+search.addEventListener("input",()=>{
 
-let v=r[field]||"Unknown"
+if(search.value.length>0){
 
-obj[v]=(obj[v]||0)+1
+results.style.display="block"
+results.innerHTML="<div class='card'>Resultado encontrado para: "+search.value+"</div>"
+
+}else{
+
+results.style.display="none"
+
+}
 
 })
 
-return obj
+/* graficos ejemplo */
 
-}
+new Chart(document.getElementById("countryChart"),{
 
-function createCharts(){
+type:"bar",
 
-let country=count("MC HOME")
-let status=count("STATUS")
-let opp=count("LUGAR DE LA OPORTUNIDAD")
-
-new Chart(countryChart,{
-type:'bar',
 data:{
-labels:Object.keys(country),
-datasets:[{data:Object.values(country)}]
+
+labels:["Brasil","México","Alemania","India"],
+datasets:[{data:[5,3,2,4]}]
+
 }
+
 })
 
-new Chart(statusChart,{
-type:'doughnut',
+new Chart(document.getElementById("statusChart"),{
+
+type:"doughnut",
+
 data:{
-labels:Object.keys(status),
-datasets:[{data:Object.values(status)}]
+
+labels:["Completed","Realized","Approved"],
+datasets:[{data:[6,4,3]}]
+
 }
+
 })
 
-new Chart(opportunityChart,{
-type:'pie',
+new Chart(document.getElementById("placeChart"),{
+
+type:"pie",
+
 data:{
-labels:Object.keys(opp),
-datasets:[{data:Object.values(opp)}]
-}
-})
+
+labels:["La Paz","Cochabamba","Santa Cruz"],
+datasets:[{data:[3,5,2]}]
 
 }
 
-document.getElementById("search").addEventListener("input",e=>{
-
-let q=e.target.value.toLowerCase()
-
-data=data.filter(r=>
-
-(r["EP/OP NAME"]||"").toLowerCase().includes(q) ||
-
-(r["MC HOME"]||"").toLowerCase().includes(q) ||
-
-(r["STATUS"]||"").toLowerCase().includes(q)
-
-)
-
-updateStats()
-
-createCharts()
-
 })
-
-loadData()
 
 </script>
 

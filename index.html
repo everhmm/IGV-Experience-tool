@@ -188,7 +188,7 @@
                     _SHOWCASING BUDDIES <span>Galería de fotos y evidencias.</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=1768148759#gid=1768148759" class="sub-button" target="_blank">
-                    FAMILIAS GLOBALES <span>Galería de fotos y evidencias.</span>
+                   FAMILIAS GLOBALES <span>Galería de fotos y evidencias.</span>
                 </a>
             </div>
         </div>
@@ -289,33 +289,37 @@
 
     // Buscador Funcional con visualización de resultados
     const dataTNs = [
-        { name: "Lara Keroline", country: "Brasil", id: "5608844", project: "HEARTBEAT", status: "Completed" },
-        { name: "Frida Mendez", country: "Mexico", id: "5647895", project: "GREAN LEADERS", status: "Completed" },
-        { name: "Mayara Cristine", country: "Brasil", id: "5608102", project: "EQUIFY", status: "Approved" }
-    ];
+        { name: "Lara Keroline", country: "Brasil", id: "5608844", project: "HEARTBEAT", status: "Completed" },
+        { name: "Frida Mendez", country: "Mexico", id: "5647895", project: "GREAN LEADERS", status: "Completed" },
+        { name: "Mayara Cristine", country: "Brasil", id: "5608102", project: "EQUIFY", status: "Approved" }
+    ];
 
-    const searchInput = document.getElementById('btnSearch');
-    const resultsBox = document.getElementById('search-results');
+    const searchInput = document.getElementById('mainSearch');
+    const resBox = document.getElementById('results-box');
 
-    searchInput.addEventListener('input', (e) => {
-        const val = e.target.value.toLowerCase();
-        if(!val) { resultsBox.style.display = 'none'; return; }
-
-        const filter = dataMock.filter(d => d.n.toLowerCase().includes(val) || d.id.includes(val) || d.p.toLowerCase().includes(val));
+    searchInput.addEventListener('keyup', () => {
+        const query = searchInput.value.toLowerCase();
+        if(!query) { resBox.style.display = 'none'; return; }
         
-        if(filter.length > 0) {
-            resultsBox.style.display = 'block';
-            resultsBox.innerHTML = filter.map(d => `
-                <div style="padding:10px; border-bottom:1px solid #eee; font-size:12px;">
-                    <b>${d.n}</b> - ${d.p}<br>
-                    <small>ID: ${d.id} | Proyecto: ${d.pr}</small>
+        const filtered = dataTNs.filter(d => 
+            d.name.toLowerCase().includes(query) || 
+            d.id.includes(query) || 
+            d.country.toLowerCase().includes(query)
+        );
+
+        if(filtered.length > 0) {
+            resBox.style.display = 'block';
+            resBox.innerHTML = filtered.map(d => `
+                <div style="padding:10px; border-bottom:1px solid #EEE; font-size:13px">
+                    <b>${d.name}</b> (${d.country})<br>
+                    <small>ID: ${d.id} | ${d.status}</small>
                 </div>
             `).join('');
         } else {
-            resultsBox.innerHTML = '<div style="padding:10px; font-size:12px; color:gray;">Sin resultados</div>';
+            resBox.innerHTML = '<div style="font-size:12px; color:gray">No se encontraron resultados</div>';
         }
     });
-
+        
     // Configuración de Gráficos (Data real del Excel analizado)
     const ctx1 = document.getElementById('chartCountry').getContext('2d');
     new Chart(ctx1, {

@@ -281,10 +281,10 @@ AIESEC
                     _EVALUACIÓN ELECCIÓN <small>Criterios de selección para nuevos buddies.</small>
                 </a>
         <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=349886342" target="_blank" class="sub-link">
-                         REPORTES EXPERIENCIAS 2026<span>Base de reportes realizados por buddies durante el programa.</span>
+                         REPORTES EXPERIENCIAS 2026<span>2026</span>
         </a>
         <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=2098444727" target="_blank" class="sub-link">
-                         GOLDEN SUNRISE<span>Tracking semanal y reportes específicos del proyecto.</span>
+                         GOLDEN SUNRISE<span>Tracking semanal 2026.</span>
         </a>
                 <a href="https://docs.google.com/forms/d/12LuXpC3-ASuBRVvLTLa7QrbJLLkZqLblucQ_dSj4-9Y/viewform" target="_blank" class="sub-link">
                     _FORMULARIO APLICACIÓN <small>Registro para nuevos Buddies.</small>
@@ -333,6 +333,9 @@ AIESEC
             <div id="sub-att" class="submenu">
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=984632049" target="_blank" class="sub-link">
                     _IDEAS MUSHU <small>Iniciativas creativas de bienvenida.</small>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=1566107400" target="_blank" class="sub-link">
+                    _LUGARES A VISITAR <small>Listado de destinos recomendados.</small>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1uHFsNLGwXl6aYvsaNNz1zxbKGZ8mxMeQBgLhg21KTMQ/edit?gid=1797585253" target="_blank" class="sub-link">
                     _COMIDAS TÍPICAS <small>Guía gastronómica paceña para TNs.</small>
@@ -401,6 +404,109 @@ AIESEC
             `).join('');
         } else {
             resBox.innerHTML = '<div style="font-size:12px; color:gray">No se encontraron resultados</div>';
+        }
+    });
+        /* --- RESPONSIVE (CELULAR) --- */
+        @media (max-width: 768px) {
+            .main-card { padding: 25px 15px; margin: 10px auto; }
+            
+            .header-top { flex-direction: column; align-items: flex-start; }
+            .search-container { max-width: 100%; }
+
+            /* 2 estadísticas por fila */
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+
+            /* Gráficos de dos en dos debajo del otro */
+            .charts-container { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .chart-card:last-child { grid-column: span 2; } /* El tercero ocupa el ancho completo o se ajusta */
+
+            /* Botones grandes verticales */
+            .grid-buttons { grid-template-columns: 1fr; }
+            .main-button { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-card">
+    <div class="header-top">
+        <div class="logo"><div class="logo-circle"></div> DAILY INSIDER</div>
+        <div class="search-container">
+            <input type="text" id="btnSearch" class="search-box" placeholder="Buscar TN, País o Proyecto...">
+            <div id="search-results"></div>
+        </div>
+    </div>
+
+    <div class="hero-section">
+        <h1>TOOL XPERIENCE</h1>
+        <p>Gestión centralizada de procesos, auditorías y recursos del área de Experience.</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-item"><h3>19</h3><span>Total TNs</span></div>
+        <div class="stat-item"><h3>2</h3><span>Completed</span></div>
+        <div class="stat-item"><h3>8</h3><span>Realized</span></div>
+        <div class="stat-item"><h3>9</h3><span>Approved</span></div>
+    </div>
+
+    <div class="grid-buttons">
+        <div class="main-button" onclick="toggleMenu('menu-ecb')">
+            <h2>E.C.B.</h2>
+             <p><strong>Experience Committee Board</strong><br>Gestión de procesos, auditoría y control de la experiencia del programa.</p>
+            <div id="menu-ecb" class="submenu-wrapper">
+               <a href="https://drive.google.com/file/d/1DB2SgFyDNFDP_74QIntr9bjaK6oXhJMk/view" target="_blank" class="sub-link">Booklet E.C.B. <span>Guía general del área Experience.</span></a>
+                <a href="#" class="sub-button">Procesos Auditoría <span>RE, FI, CO.</span></a>
+                <a href="#" class="sub-button">Control de TNs <span>Seguimiento.</span></a>
+            </div>
+        </div>
+
+        <div class="main-button" onclick="toggleMenu('menu-tns')">
+            <h2>TNs</h2>
+            <p class="desc">Logística y seguimiento de Trainees.</p>
+            <div id="menu-tns" class="submenu-wrapper">
+                <a href="#" class="sub-button">Datos TNs <span>IDs y Fechas.</span></a>
+                <a href="#" class="sub-button">Lugares <span>Propuestas turísticas.</span></a>
+                <a href="#" class="sub-button">Lead Space <span>Sesiones educativas.</span></a>
+            </div>
+        </div>
+
+        <div class="main-button" onclick="toggleMenu('menu-buddies')">
+            <h2>Buddies</h2>
+            <p class="desc">Programa de acompañamiento.</p>
+            <div id="menu-buddies" class="submenu-wrapper">
+                <a href="#" class="sub-button">Evaluación <span>Selección.</span></a>
+                <a href="#" class="sub-button">Reportes <span>Seguimiento semanal.</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="charts-container">
+        <div class="chart-card"><canvas id="chartCountry"></canvas></div>
+        <div class="chart-card"><canvas id="chartStatus"></canvas></div>
+        <div class="chart-card"><canvas id="chartOpp"></canvas></div>
+    </div>
+</div>
+
+<script>
+    // Toggle de Menús
+    function toggleMenu(id) {
+        const target = document.getElementById(id);
+        const isVisible = target.style.display === 'flex';
+        document.querySelectorAll('.submenu-wrapper').forEach(m => m.style.display = 'none');
+        target.style.display = isVisible ? 'none' : 'flex';
+    }
+
+    // Buscador adaptado
+    const searchInput = document.getElementById('btnSearch');
+    const resultsBox = document.getElementById('search-results');
+    
+    searchInput.addEventListener('input', (e) => {
+        const val = e.target.value.toLowerCase();
+        if(val.length > 1) {
+            resultsBox.style.display = 'block';
+            resultsBox.innerHTML = `<div style="padding:15px; font-size:13px;">Buscando resultados para: <b>${val}</b>...</div>`;
+        } else {
+            resultsBox.style.display = 'none';
         }
     });
 

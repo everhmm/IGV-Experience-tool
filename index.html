@@ -55,30 +55,31 @@
 .logo-section {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .human-icon {
-            height: 42px; /* Tamaño del icono */
+        /* Estilo para la silueta humana oficial */
+        .aiesec-man {
+            height: 45px;
             width: auto;
-            fill: var(--aiesec-blue);
-            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.1));
+            fill: #000000; /* Negro como en tu imagen de referencia */
         }
 
         .logo-text-brand {
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             font-weight: 800;
-            font-size: 26px;
+            font-size: 28px;
             color: var(--aiesec-blue);
-            letter-spacing: -1px;
-            line-height: 1;
+            letter-spacing: -0.5px;
+            margin-left: 5px;
         }
 
         nav.center-nav { display: flex; gap: 32px; }
         nav.center-nav a { 
-            text-decoration: none; font-size: 14px; font-weight: 600; color: var(--text-gray); 
+            text-decoration: none; font-size: 14px; font-weight: 700; color: var(--text-gray); 
         }
         nav.center-nav a:hover { color: var(--aiesec-blue); }
+        
         /* --- BUSCADOR --- */
         .search-wrapper { position: relative; margin-bottom: 30px; display: flex; justify-content: flex-end; }
         .search-bar {
@@ -171,13 +172,14 @@
 <header>
 
 <div class="logo-section">
-<div class="aiesec-brand">
-        <svg class="human-icon" viewBox="0 0 150 250" xmlns="http://www.w3.org/2000/svg">
-            <path d="M75,0 C88.8,0 100,11.2 100,25 C100,38.8 88.8,50 75,50 C61.2,50 50,38.8 50,25 C50,11.2 61.2,0 75,0 Z M45,60 L105,60 C115,60 120,65 120,75 L110,150 L140,240 C142,245 138,250 132,250 L100,250 L85,170 L70,250 L38,250 C32,250 28,245 30,240 L60,150 L50,75 C50,65 35,60 45,60 Z" />
-        </svg>
-        <span class="aiesec-text">AIESEC</span>
-    </div>
-</div>
+<svg class="aiesec-man" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="25" r="14" />
+                <path d="M40,45 L60,45 L65,100 L55,100 L58,155 L42,155 L45,100 L35,100 Z" />
+                <rect x="25" y="48" width="12" height="50" rx="6" transform="rotate(15 31 48)" />
+                <rect x="63" y="48" width="12" height="50" rx="6" transform="rotate(-15 69 48)" />
+            </svg>
+            <span class="logo-text-brand">AIESEC</span>
+        </div>
         <nav class="center-nav">
             <a href="#">EXPERIENCIA</a>
             <a href="#">RESPONSABILIDAD</a>
